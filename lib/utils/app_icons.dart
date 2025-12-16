@@ -37,6 +37,7 @@ class AppIcons {
 
   static const IconData charChart = Icons.bar_chart;
   static const IconData wallet = Icons.account_balance_wallet;
+  static const IconData transfer = Icons.swap_horiz;
 
   // Common Action Icons
   static const IconData add = Icons.add;

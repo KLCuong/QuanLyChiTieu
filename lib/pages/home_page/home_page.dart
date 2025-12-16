@@ -33,16 +33,17 @@ class _HomeState extends State<HomePage>{
         alignment: Alignment.center,
         children: [
           Container(
-            width: 78,
-            height: 78,
+            width: 64,
+            height: 64,
+            //margin: const EdgeInsets.all(4),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.readStatus.withOpacity(0.35), // tím mờ
-                  blurRadius: 20,
-                  spreadRadius: 6,
-                  offset: const Offset(0, 8),
+                  color: AppColors.readStatus.withOpacity(0.2), // tím mờ
+                  blurRadius: 8,
+                  spreadRadius: 3,
+                  offset: const Offset(0, 2),
                 ),
               ],
             ),

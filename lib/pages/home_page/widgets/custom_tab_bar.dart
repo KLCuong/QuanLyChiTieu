@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quanlychitieu/utils/app_colors.dart';
+import 'package:quanlychitieu/utils/app_fonts.dart';
 import 'package:quanlychitieu/utils/app_icons.dart';
 
 
@@ -24,35 +25,59 @@ class CustomTabBar extends StatelessWidget{
     return BottomAppBar(
         shape: const CircularNotchedRectangle(),
         notchMargin: 10,
+        shadowColor: AppColors.backgroundLight,
         color: AppColors.backgroundMain,
         child: SizedBox(
           height: tabH,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _buildTab(AppIcons.home, 0),
-              _buildTab(AppIcons.charChart, 1),
+              _buildTab(AppIcons.home, 0, "Home"),
+              _buildTab(AppIcons.transfer, 1, "Transfer"),
               const SizedBox(width: 40),
-              _buildTab(AppIcons.wallet, 2),
-              _buildTab(AppIcons.person, 3),
+              _buildTab(AppIcons.wallet, 2, "Wallet"),
+              _buildTab(AppIcons.person, 3, "Profile"),
             ],
           ),
         )
       );
   }
 
-  Widget _buildTab(IconData icon, int index){
+  Widget _buildTab(IconData icon, int index, String text) {
     final isActive = (currentIndex == index);
 
-    return IconButton(
-      onPressed: () => onTabSelected(index),
-      icon: Icon(
-        icon, size: iconSize,
-        color: isActive?
-        AppColors.readStatus : AppColors.buttonDisabled,
+    return InkWell(
+      borderRadius: BorderRadius.circular(8),
+      highlightColor: Colors.transparent,
+      splashColor: Colors.transparent,
+      onTap: () => onTabSelected(index),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              icon,
+              size: iconSize,
+              color: isActive
+                  ? AppColors.readStatus
+                  : AppColors.buttonDisabled,
+            ),
+            const SizedBox(height: 2),
+            Text(
+              text,
+              style: AppFonts.beVietnamRegular8.copyWith(
+                color: isActive
+                    ? AppColors.readStatus
+                    : AppColors.buttonDisabled,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
+
 
 }
 

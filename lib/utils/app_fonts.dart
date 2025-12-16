@@ -6,6 +6,7 @@ class AppFonts{
   static const beVietnamLight12 = TextStyle(fontFamily: 'BeVietnamPro', fontWeight: FontWeight.w300, fontSize: 12);
   static const beVietnamLight14 = TextStyle(fontFamily: 'BeVietnamPro', fontWeight: FontWeight.w300, fontSize: 14);
 
+  static const beVietnamRegular8 = TextStyle(fontFamily: 'BeVietnamPro', fontWeight: FontWeight.w400, fontSize: 8);
   static const beVietnamRegular12 = TextStyle(fontFamily: 'BeVietnamPro', fontWeight: FontWeight.w400, fontSize: 12);
   static const beVietnamRegular14 = TextStyle(fontFamily: 'BeVietnamPro', fontWeight: FontWeight.w400, fontSize: 14);
   static const beVietnamRegular16 = TextStyle(fontFamily: 'BeVietnamPro', fontWeight: FontWeight.w400, fontSize: 16);
