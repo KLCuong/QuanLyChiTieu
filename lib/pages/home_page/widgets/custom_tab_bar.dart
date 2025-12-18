@@ -60,16 +60,16 @@ class CustomTabBar extends StatelessWidget{
               icon,
               size: iconSize,
               color: isActive
-                  ? AppColors.readStatus
-                  : AppColors.buttonDisabled,
+                  ? AppColors.mintDark
+                  : AppColors.mintLight,
             ),
             const SizedBox(height: 2),
             Text(
               text,
               style: AppFonts.beVietnamRegular8.copyWith(
                 color: isActive
-                    ? AppColors.readStatus
-                    : AppColors.buttonDisabled,
+                    ? AppColors.mintDark
+                    : AppColors.mintLight,
               ),
             ),
           ],

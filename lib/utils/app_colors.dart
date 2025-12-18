@@ -2,135 +2,98 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   // =========================
-  // BRAND COLORS
+  // BLUE (PRIMARY)
   // =========================
 
-  /// Màu chính (Primary)
-  /// Dùng cho: AppBar, Button chính, Icon active, Link
-  static const Color primary = Color(0xFF1976D2);
-
-  /// Màu phụ (Secondary / Accent)
-  /// Dùng cho: highlight, CTA phụ, switch, indicator
-  static const Color secondary = Color(0xFF42A5F5);
-
-  /// Accent nhạt
-  /// Dùng cho: hover, splash, background phụ
-  static const Color accentLight = Color(0xFF90CAF9);
-
-  /// Accent đậm
-  /// Dùng cho: pressed state, focus
-  static const Color accentDark = Color(0xFF1565C0);
+  static const Color blueVeryLight = Color(0xFFE3F2FD);
+  static const Color blueLight = Color(0xFF90CAF9);
+  static const Color blue = Color(0xFF1976D2);
+  static const Color blueDark = Color(0xFF1565C0);
+  static const Color blueDarkest = Color(0xFF0D47A1);
 
   // =========================
-  // BACKGROUND COLORS
+  // PINK
   // =========================
 
-  /// Nền chính của app
+  static const Color pinkVeryLight = Color(0xFFFCE4EC);
+  static const Color pinkLight = Color(0xFFF8BBD0);
+  static const Color pink = Color(0xFFF48FB1);
+  static const Color pinkDark = Color(0xFFEC407A);
+  static const Color pinkDarkest = Color(0xFFC2185B);
+
+  // =========================
+  // PURPLE
+  // =========================
+
+  static const Color purpleVeryLight = Color(0xFFF3E5F5);
+  static const Color purpleLight = Color(0xFFE1BEE7);
+  static const Color purple = Color(0xFFCE93D8);
+  static const Color purpleDark = Color(0xFFAB47BC);
+  static const Color purpleDarkest = Color(0xFF6A1B9A);
+
+  // =========================
+  // MINT / TEAL
+  // =========================
+
+  static const Color mintVeryLight = Color(0xFFE0F2F1);
+  static const Color mintLight = Color(0xFFB2DFDB);
+  static const Color mint = Color(0xFF80CBC4);
+  static const Color mintDark = Color(0xFF26A69A);
+  static const Color mintDarkest = Color(0xFF00695C);
+
+  // =========================
+  // ORANGE
+  // =========================
+
+  static const Color orangeVeryLight = Color(0xFFFFF3E0);
+  static const Color orangeLight = Color(0xFFFFE0B2);
+  static const Color orange = Color(0xFFFFCC80);
+  static const Color orangeDark = Color(0xFFFF9800);
+  static const Color orangeDarkest = Color(0xFFE65100);
+
+  // =========================
+  // YELLOW
+  // =========================
+
+  static const Color yellowVeryLight = Color(0xFFFFFDE7);
+  static const Color yellowLight = Color(0xFFFFF9C4);
+  static const Color yellow = Color(0xFFFFF176);
+  static const Color yellowDark = Color(0xFFFBC02D);
+  static const Color yellowDarkest = Color(0xFFF57F17);
+
+  // =========================
+  // GRAY SCALE
+  // =========================
+
+  static const Color white = Color(0xFFFFFFFF);
+  static const Color greyVeryLight = Color(0xFFF5F5F5);
+  static const Color greyLight = Color(0xFFE0E0E0);
+  static const Color grey = Color(0xFFBDBDBD);
+  static const Color greyDark = Color(0xFF757575);
+  static const Color greyDarkest = Color(0xFF212121);
+
+  // =========================
+  // BACKGROUND
+  // =========================
+
   static const Color backgroundMain = Color(0xFFFBFBFB);
-
-  /// Nền sáng (list, card)
   static const Color backgroundLight = Color(0xFFF5F5F5);
-
-  /// Nền tối (dark mode)
   static const Color backgroundDark = Color(0xFF121212);
-
-  /// Nền cho input, text box
-  static const Color textBoxBackground = Color(0xFFF2F2F2);
-
-  /// Nền card
   static const Color cardBackground = Color(0xFFFFFFFF);
 
   // =========================
-  // TEXT COLORS
+  // SYSTEM
   // =========================
 
-  /// Văn bản chính
-  static const Color textPrimary = Color(0xFF212121);
-
-  /// Văn bản phụ
-  static const Color textSecondary = Color(0xFF757575);
-
-  /// Text disabled / hint
-  static const Color textHint = Color(0xFF9E9E9E);
-
-  /// Text trên nền tối
-  static const Color textWhite = Colors.white;
-
-  // =========================
-  // BORDER & DIVIDER
-  // =========================
-
-  /// Viền xám nhẹ
-  static const Color greyBorder = Color(0x39808081);
-
-  /// Viền mặc định
-  static const Color border = Color(0xFFE0E0E0);
-
-  /// Divider
-  static const Color divider = Color(0xFFEEEEEE);
-
-  // =========================
-  // CHAT / MESSAGE
-  // =========================
-
-  /// Bong bóng tin nhắn của tôi
-  static const Color myMessageBubble = Color(0xFFDCF8C6);
-
-  /// Bong bóng tin nhắn người khác
-  static const Color otherMessageBubble = Color(0xFFFFFFFF);
-
-  // =========================
-  // MESSAGE STATUS
-  // =========================
-
-  /// Đã gửi
-  static const Color sentStatus = Color(0xFF4CAF50);
-
-  /// Đã nhận
-  static const Color deliveredStatus = Color(0xFF2196F3);
-
-  /// Đã đọc
-  static const Color readStatus = Color(0xFF673AB7);
-
-  // =========================
-  // BUTTON & INPUT
-  // =========================
-
-  /// Button chính
-  static const Color buttonPrimary = primary;
-
-  /// Button phụ
-  static const Color buttonSecondary = secondary;
-
-  /// Button disabled
-  static const Color buttonDisabled = Color(0xFFBDBDBD);
-
-  /// Nền input
-  static const Color inputBackground = Color(0xFFF0F0F0);
-
-  // =========================
-  // SYSTEM COLORS
-  // =========================
-
-  /// Lỗi
-  static const Color error = Color(0xFFD32F2F);
-
-  /// Thành công
   static const Color success = Color(0xFF388E3C);
-
-  /// Cảnh báo
+  static const Color error = Color(0xFFD32F2F);
   static const Color warning = Color(0xFFFBC02D);
-
-  /// Thông tin
   static const Color info = Color(0xFF0288D1);
 
   // =========================
   // OVERLAY & SHADOW
   // =========================
 
-  /// Overlay mờ (dialog, modal)
   static const Color overlay = Color(0x80000000);
-
-  /// Shadow nhẹ
   static const Color shadow = Color(0x1F000000);
 }

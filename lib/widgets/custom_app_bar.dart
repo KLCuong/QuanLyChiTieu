@@ -43,14 +43,14 @@ class CustomAppBarState extends State<CustomAppBar>{
               child: (widget.goBack)? IconButton(
                 onPressed: () => context.pop(),
                 icon: const Icon(AppIcons.arrowBack,
-                  size: 26, color: AppColors.primary,),
+                  size: 26, color: AppColors.greyDarkest,),
               ) : widget.leftscr,
             ),
           ),
           Center(
             child: Text(
               widget.title,
-              style: AppFonts.beVietnamSemiBold16.copyWith(color: AppColors.textPrimary),
+              style: AppFonts.beVietnamSemiBold16.copyWith(color: AppColors.greyDarkest),
             ),
           ),
           Container(

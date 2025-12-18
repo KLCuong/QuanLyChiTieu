@@ -35,7 +35,7 @@ class _SplashPageState extends State<SplashPage> {
         child: Center(
             child: Text(
               "This is ASplashPage",
-              style: AppFonts.beVietnamMedium16.copyWith(color: AppColors.textPrimary),
+              style: AppFonts.beVietnamMedium16.copyWith(color: AppColors.greyDarkest),
             )
         ),
       ),
