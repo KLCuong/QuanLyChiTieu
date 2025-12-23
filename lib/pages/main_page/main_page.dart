@@ -3,6 +3,7 @@ import 'package:quanlychitieu/pages/main_page/widgets/money_card.dart';
 import 'package:quanlychitieu/utils/app_colors.dart';
 import 'package:quanlychitieu/utils/app_fonts.dart';
 import 'package:quanlychitieu/utils/app_icons.dart';
+import 'package:quanlychitieu/widgets/custom_box_item.dart';
 import 'package:quanlychitieu/widgets/scroll_buble.dart';
 class MainPage extends StatefulWidget{
 
@@ -89,6 +90,38 @@ class _MainState extends State<MainPage>{
             ),
           ),
           const IncomeSpentCard(),
+          const SizedBox(height: 8,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+             Text(
+               'Recent transaction',
+               style: AppFonts.beVietnamRegular14
+                   .copyWith(color: AppColors.greyDarkest),
+               textAlign: TextAlign.start,
+             ),
+             ScrollBubble(
+               title: "See all",
+               marginRight: false,
+               isActive: false,
+               rightIcon: const Icon(AppIcons.arrowForward,
+                 color: AppColors.grey,),
+               onTap: (){},
+             )
+            ],
+          ),
+          const SizedBox(height: 8,),
+          Flexible(
+            child: ListView(
+              children: List.generate(7,
+                  (index) => CustomBoxItem(
+                    title: "Food",
+                    description: "Card",
+                    date: DateTime.now(),
+                    boxColor: AppColors.orangeLight,
+                  )),
+            ),
+          )
         ],
       )
     );

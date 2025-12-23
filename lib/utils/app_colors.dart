@@ -5,7 +5,7 @@ class AppColors {
   // BLUE (PRIMARY)
   // =========================
 
-  static const Color blueVeryLight = Color(0xFFE3F2FD);
+  static const Color blueVeryLight = Color(0xFFE3F2FD); //Transportation
   static const Color blueLight = Color(0xFF90CAF9);
   static const Color blue = Color(0xFF1976D2);
   static const Color blueDark = Color(0xFF1565C0);
@@ -15,7 +15,7 @@ class AppColors {
   // PINK
   // =========================
 
-  static const Color pinkVeryLight = Color(0xFFFCE4EC);
+  static const Color pinkVeryLight = Color(0xFFFCE4EC); //Shopping, Healthcare
   static const Color pinkLight = Color(0xFFF8BBD0);
   static const Color pink = Color(0xFFF48FB1);
   static const Color pinkDark = Color(0xFFEC407A);
@@ -25,7 +25,7 @@ class AppColors {
   // PURPLE
   // =========================
 
-  static const Color purpleVeryLight = Color(0xFFF3E5F5);
+  static const Color purpleVeryLight = Color(0xFFF3E5F5);//Entertainment
   static const Color purpleLight = Color(0xFFE1BEE7);
   static const Color purple = Color(0xFFCE93D8);
   static const Color purpleDark = Color(0xFFAB47BC);
@@ -35,8 +35,8 @@ class AppColors {
   // MINT / TEAL
   // =========================
 
-  static const Color mintVeryLight = Color(0xFFE0F2F1);
-  static const Color mintLight = Color(0xFFB2DFDB);
+  static const Color mintVeryLight = Color(0xFFE0F2F1); //Housing
+  static const Color mintLight = Color(0xFFB2DFDB); //Income
   static const Color mint = Color(0xFF80CBC4);
   static const Color mintDark = Color(0xFF26A69A);
   static const Color mintDarkest = Color(0xFF00695C);
@@ -45,7 +45,7 @@ class AppColors {
   // ORANGE
   // =========================
 
-  static const Color orangeVeryLight = Color(0xFFFFF3E0);
+  static const Color orangeVeryLight = Color(0xFFFFF3E0); //Food
   static const Color orangeLight = Color(0xFFFFE0B2);
   static const Color orange = Color(0xFFFFCC80);
   static const Color orangeDark = Color(0xFFFF9800);
@@ -55,7 +55,7 @@ class AppColors {
   // YELLOW
   // =========================
 
-  static const Color yellowVeryLight = Color(0xFFFFFDE7);
+  static const Color yellowVeryLight = Color(0xFFFFFDE7); //Education
   static const Color yellowLight = Color(0xFFFFF9C4);
   static const Color yellow = Color(0xFFFFF176);
   static const Color yellowDark = Color(0xFFFBC02D);
@@ -65,7 +65,7 @@ class AppColors {
   // GRAY SCALE
   // =========================
 
-  static const Color white = Color(0xFFFFFFFF);
+  static const Color white = Color(0xFFFFFFFF); //Transfer, Other
   static const Color greyVeryLight = Color(0xFFF5F5F5);
   static const Color greyLight = Color(0xFFE0E0E0);
   static const Color grey = Color(0xFFBDBDBD);

@@ -53,4 +53,49 @@ class AppIcons {
   static const IconData arrowUp = Icons.arrow_upward;
   static const IconData arrowDown = Icons.arrow_downward;
 
+  // =========================
+// CATEGORY ICONS
+// =========================
+
+// Food & Drink
+  static const IconData food = Icons.restaurant_rounded;
+  static const IconData foodOutlined = Icons.restaurant_outlined;
+
+// Transportation
+  static const IconData transport = Icons.directions_car_rounded;
+  static const IconData transportOutlined = Icons.directions_car_outlined;
+
+// Shopping
+  static const IconData shopping = Icons.shopping_bag_rounded;
+  static const IconData shoppingOutlined = Icons.shopping_bag_outlined;
+
+// Entertainment
+  static const IconData entertainment = Icons.videogame_asset_rounded;
+  static const IconData entertainmentOutlined = Icons.videogame_asset_outlined;
+
+// Housing
+  static const IconData housing = Icons.home_work_rounded;
+  static const IconData housingOutlined = Icons.home_work_outlined;
+
+// Education
+  static const IconData education = Icons.school_rounded;
+  static const IconData educationOutlined = Icons.school_outlined;
+
+// Transfer
+  static const IconData transferMoney = Icons.sync_alt_rounded;
+  static const IconData transferMoneyOutlined = Icons.sync_alt;
+
+// Income
+  static const IconData income = Icons.attach_money_rounded;
+  static const IconData incomeOutlined = Icons.attach_money;
+
+// Healthcare
+  static const IconData healthcare = Icons.local_hospital_rounded;
+  static const IconData healthcareOutlined = Icons.local_hospital_outlined;
+
+// Other
+  static const IconData other = Icons.category_rounded;
+  static const IconData otherOutlined = Icons.category_outlined;
+
+
 }
