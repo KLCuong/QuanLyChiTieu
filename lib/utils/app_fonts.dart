@@ -5,16 +5,21 @@ class AppFonts{
   // --- BeVietnamPro ---
   static const beVietnamLight12 = TextStyle(fontFamily: 'BeVietnamPro', fontWeight: FontWeight.w300, fontSize: 12);
   static const beVietnamLight14 = TextStyle(fontFamily: 'BeVietnamPro', fontWeight: FontWeight.w300, fontSize: 14);
+  static const beVietnamLight40 = TextStyle(fontFamily: 'BeVietnamPro', fontWeight: FontWeight.w300, fontSize: 40);
 
+
+  static const beVietnamRegular8 = TextStyle(fontFamily: 'BeVietnamPro', fontWeight: FontWeight.w400, fontSize: 8);
   static const beVietnamRegular12 = TextStyle(fontFamily: 'BeVietnamPro', fontWeight: FontWeight.w400, fontSize: 12);
   static const beVietnamRegular14 = TextStyle(fontFamily: 'BeVietnamPro', fontWeight: FontWeight.w400, fontSize: 14);
   static const beVietnamRegular16 = TextStyle(fontFamily: 'BeVietnamPro', fontWeight: FontWeight.w400, fontSize: 16);
-
+  static const beVietnamRegular40 = TextStyle(fontFamily: 'BeVietnamPro', fontWeight: FontWeight.w400, fontSize: 40);
 
   static const beVietnamMedium12 = TextStyle(fontFamily: 'BeVietnamPro', fontWeight: FontWeight.w500, fontSize: 12);
   static const beVietnamMedium14 = TextStyle(fontFamily: 'BeVietnamPro', fontWeight: FontWeight.w500, fontSize: 14);
   static const beVietnamMedium16 = TextStyle(fontFamily: 'BeVietnamPro', fontWeight: FontWeight.w500, fontSize: 16);
   static const beVietnamMedium18 = TextStyle(fontFamily: 'BeVietnamPro', fontWeight: FontWeight.w500, fontSize: 18);
+  static const beVietnamSemiBold40 = TextStyle(fontFamily: 'BeVietnamPro', fontWeight: FontWeight.w600, fontSize: 40);
+
 
   static const beVietnamSemiBold14 = TextStyle(fontFamily: 'BeVietnamPro', fontWeight: FontWeight.w600, fontSize: 14);
   static const beVietnamSemiBold16 = TextStyle(fontFamily: 'BeVietnamPro', fontWeight: FontWeight.w600, fontSize: 16);

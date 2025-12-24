@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:quanlychitieu/pages/home_page.dart';
+import 'package:quanlychitieu/pages/home_page/home_page.dart';
 import 'package:quanlychitieu/pages/splash_page.dart';
 
 import 'app_routes.dart';
