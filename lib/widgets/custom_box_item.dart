@@ -12,10 +12,10 @@ class CustomBoxItem extends StatefulWidget{
   const CustomBoxItem({
     super.key,
     this.onPressed,
-    this.title,
+    required this.title,
     this.description,
     this.total = "0",
-    this.date,
+    required this.date,
     this.leftIcon,
     this.rightIcon,
     this.boxColor

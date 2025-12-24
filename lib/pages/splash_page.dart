@@ -33,9 +33,29 @@ class _SplashPageState extends State<SplashPage> {
       body: Container(
         margin: const EdgeInsets.all(16),
         child: Center(
-            child: Text(
-              "This is ASplashPage",
-              style: AppFonts.beVietnamMedium16.copyWith(color: AppColors.greyDarkest),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(bottom: 8),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: const Image(
+                      image: AssetImage("assets/icons/slshizuka.jpg"),
+                      width: 240,
+                      height: 240,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                Text(
+                  "Your money is gone",
+                  style: AppFonts.beVietnamRegular16.copyWith(color: AppColors.greyDarkest),
+                  textAlign: TextAlign.center,
+                )
+
+              ],
             )
         ),
       ),

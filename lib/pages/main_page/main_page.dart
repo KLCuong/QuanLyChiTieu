@@ -3,6 +3,7 @@ import 'package:quanlychitieu/pages/main_page/widgets/money_card.dart';
 import 'package:quanlychitieu/utils/app_colors.dart';
 import 'package:quanlychitieu/utils/app_fonts.dart';
 import 'package:quanlychitieu/utils/app_icons.dart';
+import 'package:quanlychitieu/utils/transcation_category.dart';
 import 'package:quanlychitieu/widgets/custom_box_item.dart';
 import 'package:quanlychitieu/widgets/scroll_buble.dart';
 class MainPage extends StatefulWidget{
@@ -112,15 +113,21 @@ class _MainState extends State<MainPage>{
           ),
           const SizedBox(height: 8,),
           Flexible(
-            child: ListView(
-              children: List.generate(7,
-                  (index) => CustomBoxItem(
-                    title: "Food",
-                    description: "Card",
+            child: ListView.builder(
+                itemCount: CategoryType.values.length,
+                itemBuilder: (context, index){
+                  final type = CategoryType.values[index];
+                  final style = AppCategoryStyle.styles[type]!;
+                  return CustomBoxItem(
+                    title: type.name,
+                    description: "Nah",
+                    leftIcon: Icon(style.icon, color: style.iconColor,),
+                    boxColor: style.backgroundColor,
                     date: DateTime.now(),
-                    boxColor: AppColors.orangeLight,
-                  )),
-            ),
+                  );
+                },
+
+            )
           )
         ],
       )
