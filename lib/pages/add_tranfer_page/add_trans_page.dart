@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:intl/intl.dart';
 import 'package:quanlychitieu/utils/app_colors.dart';
 import 'package:quanlychitieu/utils/app_enums.dart';
 import 'package:quanlychitieu/utils/app_fonts.dart';
@@ -21,11 +22,14 @@ class AddTranferPage extends StatefulWidget{
 class _AddTranferState extends State<AddTranferPage>{
   TextEditingController? fromWallet = TextEditingController(text: "Cash");
   TextEditingController? toWallet = TextEditingController(text: "Bank");
+  TextEditingController? amount = TextEditingController(text: "0");
+  TextEditingController? date = TextEditingController(text: DateFormat('dd/MM/yyyy').format(DateTime.now()));
+  TextEditingController? note = TextEditingController(text: "");
 
   TransactionType? selectedFromWallet = TransactionType.cash;
   TransactionType? selectedToWallet = TransactionType.bank;
 
-  String? availableFrom = "0 VND";
+  String? availableFrom = "100 VND";
   String? availableTo = "0 VND";
 
   void showPopupMenu(
@@ -142,6 +146,15 @@ class _AddTranferState extends State<AddTranferPage>{
     );
   }
 
+  void getMaxAmount(){
+    String amountS = availableFrom!;
+    String get = amountS.substring(0, amountS.length - 4);
+    setState(() {
+      amount!.text = get;
+    });
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -206,6 +219,8 @@ class _AddTranferState extends State<AddTranferPage>{
                     ),
                   ),
                 ),
+
+                //Main container
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 16),
                   padding: const EdgeInsets.all(16),
@@ -261,7 +276,7 @@ class _AddTranferState extends State<AddTranferPage>{
                       ),
 
                       Container(
-                        margin: const EdgeInsets.symmetric(vertical: 8),
+                        margin: const EdgeInsets.symmetric(vertical: 4),
                         padding: const EdgeInsets.all(8),
                         decoration: const BoxDecoration(
                           shape: BoxShape.circle,
@@ -319,7 +334,50 @@ class _AddTranferState extends State<AddTranferPage>{
                           )
                       ),
 
-
+                      //Continue
+                      const SizedBox(height: 20,),
+                      Text(
+                        "Amount",
+                        style: AppFonts.beVietnamRegular12.
+                        copyWith(color: AppColors.greyDarkest),
+                        textAlign: TextAlign.left,
+                      ),
+                      const SizedBox(height: 4,),
+                      CustomTextField(
+                        controller: amount,
+                        readOnly: false,
+                        labelStyle: AppFonts.beVietnamRegular12.
+                        copyWith(color: AppColors.greyDarkest),
+                        prefixIcon: Container(
+                          width: 32,
+                          child: Center(
+                            child: Text("VND",
+                              style: AppFonts.beVietnamRegular14.
+                              copyWith(color: AppColors.grey),
+                            ),
+                          ),
+                        ),
+                        suffixIcon: InkWell(
+                          onTap: getMaxAmount,
+                          highlightColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(vertical: 6),
+                            padding: const EdgeInsets.symmetric(horizontal: 4),
+                            width: 48,
+                            decoration: BoxDecoration(
+                              color: AppColors.blueLight,
+                              borderRadius: BorderRadius.circular(8)
+                            ),
+                            child: Center(
+                              child: Text("Max",
+                                style: AppFonts.beVietnamRegular14.
+                                  copyWith(color: AppColors.blue),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 )
