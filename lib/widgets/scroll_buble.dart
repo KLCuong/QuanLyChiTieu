@@ -54,7 +54,7 @@ class _ScrollBubleState extends State<ScrollBubble>{
                   if(widget.leftIcon != null) widget.leftIcon!,
                   Text(
                     widget.title,
-                    style: AppFonts.beVietnamRegular14.copyWith(
+                    style: AppFonts.beVietnamRegular12.copyWith(
                       color: widget.isActive ? AppColors.greyDarkest : AppColors.grey,
                     ),
                     textAlign: TextAlign.center,

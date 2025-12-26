@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quanlychitieu/pages/add_tranfer_page/add_trans_page.dart';
 import 'package:quanlychitieu/pages/home_page/widgets/custom_tab_bar.dart';
 import 'package:quanlychitieu/pages/main_page/main_page.dart';
 import 'package:quanlychitieu/utils/app_colors.dart';
@@ -18,9 +19,10 @@ class _HomeState extends State<HomePage>{
   int _currentIndex = 0;
   final List<Widget> _pages = const[
     MainPage(),
-    Center(child: Text('Stats'),),
+    AddTranferPage(),
     Center(child: Text('Wallet'),),
     Center(child: Text('Profile'),),
+    Center(child: Text('Stats'),),
   ];
 
 
@@ -56,7 +58,11 @@ class _HomeState extends State<HomePage>{
               shape: const CircleBorder(),
               backgroundColor: AppColors.mintDark,
               elevation: 0,
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  _currentIndex = 4;
+                });
+              },
               child: const Icon(
                 AppIcons.add,
                 color: AppColors.backgroundMain,

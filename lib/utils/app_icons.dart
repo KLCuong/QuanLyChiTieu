@@ -97,5 +97,10 @@ class AppIcons {
   static const IconData other = Icons.category_rounded;
   static const IconData otherOutlined = Icons.category_outlined;
 
+//AssetImage
+  static const AssetImage cash_png = AssetImage("assets/icons/cash.png");
+  static const AssetImage bank_png = AssetImage("assets/icons/bank.png");
+  static const AssetImage wallet_png = AssetImage("assets/icons/wallet.png");
+
 
 }

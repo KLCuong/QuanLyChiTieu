@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quanlychitieu/utils/app_icons.dart';
 import 'app_colors.dart';
 
+//For app category
 enum CategoryType {
   food,
   transport,
@@ -87,6 +88,40 @@ class AppCategoryStyle {
       icon: AppIcons.other,
       backgroundColor: AppColors.greyVeryLight,
       iconColor: AppColors.greyDarkest,
+    ),
+  };
+}
+
+//For transcations change
+enum TransactionType{
+  cash,
+  bank,
+  wallet
+}
+
+class TransactionStyle{
+  final String? title;
+  final AssetImage? icon;
+
+  const TransactionStyle({
+    required this.icon,
+    required this.title
+  });
+}
+
+class AppTranscationStyle{
+  static const Map<TransactionType, TransactionStyle> styles = {
+    TransactionType.cash: TransactionStyle(
+        icon: AppIcons.cash_png,
+        title: "Cash"
+    ),
+    TransactionType.wallet: TransactionStyle(
+        icon: AppIcons.wallet_png,
+        title: "Wallet"
+    ),
+    TransactionType.bank: TransactionStyle(
+        icon: AppIcons.bank_png,
+        title: "Bank"
     ),
   };
 }

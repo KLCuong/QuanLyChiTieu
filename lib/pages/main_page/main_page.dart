@@ -3,7 +3,7 @@ import 'package:quanlychitieu/pages/main_page/widgets/money_card.dart';
 import 'package:quanlychitieu/utils/app_colors.dart';
 import 'package:quanlychitieu/utils/app_fonts.dart';
 import 'package:quanlychitieu/utils/app_icons.dart';
-import 'package:quanlychitieu/utils/transcation_category.dart';
+import 'package:quanlychitieu/utils/app_enums.dart';
 import 'package:quanlychitieu/widgets/custom_box_item.dart';
 import 'package:quanlychitieu/widgets/scroll_buble.dart';
 class MainPage extends StatefulWidget{
