@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:quanlychitieu/utils/app_colors.dart';
 import 'package:quanlychitieu/utils/app_fonts.dart';
+import 'package:quanlychitieu/widgets/page_style.dart';
 
 import '../routes/app_routes.dart';
 
@@ -22,15 +23,14 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
 
     Timer(const Duration(seconds: 3),(){
-      context.go(AppRoute.home.path);
+      context.go(AppRoute.home.path); //Xu ly de backpage ve /
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.backgroundMain,
-      body: Container(
+    return CustomPage(
+      widget: Container(
         margin: const EdgeInsets.all(16),
         child: Center(
             child: Column(

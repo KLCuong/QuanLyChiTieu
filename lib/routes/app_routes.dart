@@ -11,12 +11,15 @@ class AppRouteInfo{
 class AppRoute{
   static const splash = AppRouteInfo(
     name: 'Splash_Page',
-    path: '/'
+    path: '/splash'
   );
   static const home = AppRouteInfo(
     name: 'Home_Page',
     path: '/home'
   );
-
-  static List<AppRouteInfo> get all => [splash, home];
+  static const transfer_history = AppRouteInfo(
+    name: 'Transfer_History_Page',
+    path: '/transfer_history'
+  );
+  static List<AppRouteInfo> get all => [splash, home, transfer_history];
 }

@@ -4,6 +4,7 @@ import 'package:quanlychitieu/pages/home_page/widgets/custom_tab_bar.dart';
 import 'package:quanlychitieu/pages/main_page/main_page.dart';
 import 'package:quanlychitieu/utils/app_colors.dart';
 import 'package:quanlychitieu/utils/app_icons.dart';
+import 'package:quanlychitieu/widgets/page_style.dart';
 
 
 class HomePage extends StatefulWidget{
@@ -29,9 +30,8 @@ class _HomeState extends State<HomePage>{
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.backgroundMain,
-      body: _pages[_currentIndex],
+    return CustomPage(
+      widget: _pages[_currentIndex],
       floatingActionButton: Stack(
         alignment: Alignment.center,
         children: [

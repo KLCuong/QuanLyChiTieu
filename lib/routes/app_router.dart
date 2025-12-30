@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:quanlychitieu/pages/home_page/home_page.dart';
 import 'package:quanlychitieu/pages/splash_page.dart';
+import 'package:quanlychitieu/pages/transfer_history_page/transfer_history_page.dart';
 
 import 'app_routes.dart';
 
@@ -37,7 +38,19 @@ final GoRouter goRouter = GoRouter(
                 transitionsBuilder: _slideTransition
             );
           }
-        )
+        ),
+        GoRoute(
+          path: AppRoute.transfer_history.path,
+          name: AppRoute.transfer_history.name,
+          pageBuilder: (context, state){
+            return CustomTransitionPage(
+                key: state.pageKey,
+                child: TransferHistoryPage(),
+                transitionDuration: const Duration(milliseconds: 400),
+                transitionsBuilder: _slideTransition
+            );
+          }
+        ),
       ]
     )
   ]
