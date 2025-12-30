@@ -320,19 +320,34 @@ class _AddTranferState extends State<AddTranferPage>{
                         )
                       ),
 
-                      Container(
-                        margin: const EdgeInsets.symmetric(vertical: 4),
-                        padding: const EdgeInsets.all(8),
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: AppColors.mintVeryLight
-                        ),
-                        child: const Center(
-                          child: Icon(
-                            AppIcons.transferMoney,
-                            size: 24,
-                            color: AppColors.mint,
-                          )
+                      InkWell(
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        onTap: (){
+                          setState(() {
+                            String mid = fromWallet!.text;
+                            TransactionType? midStyle = selectedFromWallet;
+                            fromWallet!.text = toWallet!.text;
+                            toWallet!.text = mid;
+                            selectedFromWallet = selectedToWallet;
+                            selectedToWallet = midStyle;
+                          });
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(vertical: 4),
+                          padding: const EdgeInsets.all(8),
+                          decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: AppColors.mintVeryLight
+                          ),
+                          child: const Center(
+                              child: Icon(
+                                AppIcons.transferMoney,
+                                size: 24,
+                                color: AppColors.mint,
+                              )
+                          ),
                         ),
                       ),
 
