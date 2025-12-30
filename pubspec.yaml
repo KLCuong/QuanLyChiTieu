@@ -46,6 +46,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   intl: ^0.18.0
   fl_chart: ^0.69.0
+  date_picker_plus: ^3.0.2
 
 dev_dependencies:
   flutter_test:

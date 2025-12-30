@@ -8,12 +8,14 @@ class ScrollBubble extends StatefulWidget {
   final bool isActive, marginRight;
   final VoidCallback onTap;
   final Widget? leftIcon, rightIcon;
+  final Color? background;
 
   const ScrollBubble({
     Key? key,
     this.leftIcon,
     this.rightIcon,
     this.marginRight = true,
+    this.background = AppColors.white,
     required this.title,
     required this.isActive,
     required this.onTap,
@@ -43,6 +45,7 @@ class _ScrollBubleState extends State<ScrollBubble>{
           Container(
               padding: padding,
               decoration: BoxDecoration(
+                color: widget.background,
                 border: Border.all(
                   width: 1,
                   color: widget.isActive ? AppColors.mintDarkest : AppColors.grey,

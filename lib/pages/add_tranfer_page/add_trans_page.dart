@@ -1,3 +1,4 @@
+import 'package:date_picker_plus/date_picker_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
@@ -31,6 +32,50 @@ class _AddTranferState extends State<AddTranferPage>{
 
   String? availableFrom = "100 VND";
   String? availableTo = "0 VND";
+
+  //Date Picker
+  DateTime? predate = DateTime.now();
+  Future<void> _selectDate(BuildContext context) async {
+    DateTime now = DateTime.now();
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: predate,
+      firstDate: DateTime(now.year - 3, now.month, now.day),
+      lastDate: DateTime(now.year, now.month, now.day),
+      helpText: 'Select booking date', // Optional customization
+    );
+    String? pickedformat = DateFormat('dd/MM/yyyy').format(picked!);
+    if (pickedformat != null && pickedformat != date!.text) {
+      setState(() {
+        predate = picked;
+        date!.text = pickedformat;
+      });
+    }
+  }
+
+  Widget confirmButton(){
+    return InkWell(
+      onTap: (){},
+      highlightColor: Colors.transparent,
+      hoverColor: Colors.transparent,
+      focusColor: Colors.transparent,
+      child: Container(
+        margin: const EdgeInsets.fromLTRB(32, 20, 32, 8),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        decoration: BoxDecoration(
+            border: Border.all(color: AppColors.mintDarkest, width: 1),
+            borderRadius: BorderRadius.circular(16),
+            color: AppColors.mintDark
+        ),
+        child: Center(
+          child: Text(
+            "Transfer", textAlign: TextAlign.center,
+            style: AppFonts.beVietnamRegular16.copyWith(color: AppColors.white),
+          ),
+        ),
+      ),
+    );
+  }
 
   void showPopupMenu(
       BuildContext context,
@@ -378,6 +423,48 @@ class _AddTranferState extends State<AddTranferPage>{
                           ),
                         ),
                       ),
+
+                      //Date
+                      const SizedBox(height: 20,),
+                      Text(
+                        "Date",
+                        style: AppFonts.beVietnamRegular12.
+                        copyWith(color: AppColors.greyDarkest),
+                        textAlign: TextAlign.left,
+                      ),
+                      CustomTextField(
+                        prefixIcon: const Icon(AppIcons.calender, size: 16,),
+                        controller: date,
+                        readOnly: true,
+                        onTap: (){
+                          _selectDate(context);
+                        },
+                        labelStyle: AppFonts.beVietnamRegular12.
+                        copyWith(color: AppColors.greyDarkest),
+                      ),
+
+                      //Note
+                      const SizedBox(height: 20,),
+                      Text(
+                        "Note (Optional)",
+                        style: AppFonts.beVietnamRegular12.
+                        copyWith(color: AppColors.greyDarkest),
+                        textAlign: TextAlign.left,
+                      ),
+                      CustomTextField(
+                        prefixIcon: const Icon(AppIcons.note, size: 16,),
+                        controller: note,
+                        hintText: "Add a note",
+                        hintStyle: AppFonts.beVietnamRegular12.
+                        copyWith(color: AppColors.greyDarkest),
+                        labelStyle: AppFonts.beVietnamRegular12.
+                        copyWith(color: AppColors.greyDarkest),
+                        maxLines: 7,
+                      ),
+
+                      //Confirm button
+                      confirmButton(),
+
                     ],
                   ),
                 )
