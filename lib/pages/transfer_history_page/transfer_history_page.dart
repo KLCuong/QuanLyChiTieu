@@ -33,7 +33,7 @@ class _TransHisState extends State<TransferHistoryPage>{
               copyWith(color: AppColors.greyDarkest),
               textAlign: TextAlign.left,
             ),
-            const SizedBox(height: 8,),
+            const SizedBox(height: 16,),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

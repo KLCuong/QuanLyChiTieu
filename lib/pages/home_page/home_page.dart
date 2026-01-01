@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quanlychitieu/pages/add_tranfer_page/add_trans_page.dart';
 import 'package:quanlychitieu/pages/home_page/widgets/custom_tab_bar.dart';
 import 'package:quanlychitieu/pages/main_page/main_page.dart';
+import 'package:quanlychitieu/pages/wallet_page/wallet_page.dart';
 import 'package:quanlychitieu/utils/app_colors.dart';
 import 'package:quanlychitieu/utils/app_icons.dart';
 import 'package:quanlychitieu/widgets/page_style.dart';
@@ -21,7 +22,7 @@ class _HomeState extends State<HomePage>{
   final List<Widget> _pages = const[
     MainPage(),
     AddTranferPage(),
-    Center(child: Text('Wallet'),),
+    WalletPage(),
     Center(child: Text('Profile'),),
     Center(child: Text('Stats'),),
   ];

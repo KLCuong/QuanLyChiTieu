@@ -12,12 +12,15 @@ class AppFonts{
   static const beVietnamRegular12 = TextStyle(fontFamily: 'BeVietnamPro', fontWeight: FontWeight.w400, fontSize: 12);
   static const beVietnamRegular14 = TextStyle(fontFamily: 'BeVietnamPro', fontWeight: FontWeight.w400, fontSize: 14);
   static const beVietnamRegular16 = TextStyle(fontFamily: 'BeVietnamPro', fontWeight: FontWeight.w400, fontSize: 16);
+  static const beVietnamRegular32 = TextStyle(fontFamily: 'BeVietnamPro', fontWeight: FontWeight.w400, fontSize: 32);
   static const beVietnamRegular40 = TextStyle(fontFamily: 'BeVietnamPro', fontWeight: FontWeight.w400, fontSize: 40);
 
   static const beVietnamMedium12 = TextStyle(fontFamily: 'BeVietnamPro', fontWeight: FontWeight.w500, fontSize: 12);
   static const beVietnamMedium14 = TextStyle(fontFamily: 'BeVietnamPro', fontWeight: FontWeight.w500, fontSize: 14);
   static const beVietnamMedium16 = TextStyle(fontFamily: 'BeVietnamPro', fontWeight: FontWeight.w500, fontSize: 16);
   static const beVietnamMedium18 = TextStyle(fontFamily: 'BeVietnamPro', fontWeight: FontWeight.w500, fontSize: 18);
+  static const beVietnamMedium32 = TextStyle(fontFamily: 'BeVietnamPro', fontWeight: FontWeight.w500, fontSize: 32);
+
   static const beVietnamSemiBold40 = TextStyle(fontFamily: 'BeVietnamPro', fontWeight: FontWeight.w600, fontSize: 40);
 
 
@@ -37,6 +40,7 @@ class AppFonts{
 
   static const robotoMedium14 = TextStyle(fontFamily: 'Roboto', fontWeight: FontWeight.w500, fontSize: 14);
   static const robotoMedium16 = TextStyle(fontFamily: 'Roboto', fontWeight: FontWeight.w500, fontSize: 16);
+  static const robotoMedium32 = TextStyle(fontFamily: 'Roboto', fontWeight: FontWeight.w500, fontSize: 32);
 
   static const robotoBold14 = TextStyle(fontFamily: 'Roboto', fontWeight: FontWeight.w700, fontSize: 14);
   static const robotoBold16 = TextStyle(fontFamily: 'Roboto', fontWeight: FontWeight.w700, fontSize: 16);
