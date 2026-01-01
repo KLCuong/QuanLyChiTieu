@@ -93,33 +93,33 @@ class AppCategoryStyle {
 }
 
 //For transcations change
-enum TransactionType{
+enum TransferType{
   cash,
   bank,
   wallet
 }
 
-class TransactionStyle{
+class TransferStyle{
   final String? title;
   final AssetImage? icon;
 
-  const TransactionStyle({
+  const TransferStyle({
     required this.icon,
     required this.title
   });
 }
 
-class AppTranscationStyle{
-  static const Map<TransactionType, TransactionStyle> styles = {
-    TransactionType.cash: TransactionStyle(
+class AppTransferStyle{
+  static const Map<TransferType, TransferStyle> styles = {
+    TransferType.cash: TransferStyle(
         icon: AppIcons.cash_png,
         title: "Cash"
     ),
-    TransactionType.wallet: TransactionStyle(
+    TransferType.wallet: TransferStyle(
         icon: AppIcons.wallet_png,
         title: "Wallet"
     ),
-    TransactionType.bank: TransactionStyle(
+    TransferType.bank: TransferStyle(
         icon: AppIcons.bank_png,
         title: "Bank"
     ),

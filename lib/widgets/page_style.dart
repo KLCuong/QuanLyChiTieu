@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:quanlychitieu/pages/add_tranfer_page/add_trans_page.dart';
 import 'package:quanlychitieu/routes/app_routes.dart';
 import 'package:quanlychitieu/utils/app_colors.dart';
+import 'package:quanlychitieu/widgets/custom_app_bar.dart';
 
 
 class CustomPage extends StatefulWidget{
@@ -10,13 +11,17 @@ class CustomPage extends StatefulWidget{
   final Widget? floatingActionButton;
   final FloatingActionButtonLocation? floatingActionButtonLocation;
   final Widget? bottomNavigationBar;
+  final bool? hasAppBar;
+  final String? pageName;
 
   const CustomPage({
     super.key,
     required this.widget,
     this.floatingActionButton,
     this.floatingActionButtonLocation,
-    this.bottomNavigationBar
+    this.bottomNavigationBar,
+    this.hasAppBar = false,
+    this.pageName
   });
 
   @override
@@ -48,7 +53,10 @@ class _CustomPageState extends State<CustomPage>{
         floatingActionButton: widget.floatingActionButton,
         floatingActionButtonLocation: widget.floatingActionButtonLocation,
         bottomNavigationBar: widget.bottomNavigationBar,
-        body: widget.widget,
+        appBar: (widget.hasAppBar!)? CustomAppBar(title: widget.pageName!) : null,
+        body: widget.widget!,
+
+
       ),
     );
   }

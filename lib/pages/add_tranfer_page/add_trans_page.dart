@@ -30,8 +30,8 @@ class _AddTranferState extends State<AddTranferPage>{
   TextEditingController? date = TextEditingController(text: DateFormat('dd/MM/yyyy').format(DateTime.now()));
   TextEditingController? note = TextEditingController(text: "");
 
-  TransactionType? selectedFromWallet = TransactionType.cash;
-  TransactionType? selectedToWallet = TransactionType.bank;
+  TransferType? selectedFromWallet = TransferType.cash;
+  TransferType? selectedToWallet = TransferType.bank;
 
   String? availableFrom = "100 VND";
   String? availableTo = "0 VND";
@@ -83,7 +83,7 @@ class _AddTranferState extends State<AddTranferPage>{
   void showPopupMenu(
       BuildContext context,
       TextEditingController? controller,
-      TransactionType? currentType,
+      TransferType? currentType,
       bool? from
       ) {
     showModalBottomSheet(
@@ -124,10 +124,10 @@ class _AddTranferState extends State<AddTranferPage>{
                   ),
                   ListView.builder(
                       shrinkWrap: true,
-                      itemCount: TransactionType.values.length,
+                      itemCount: TransferType.values.length,
                       itemBuilder: (context, index) {
-                        final type = TransactionType.values[index];
-                        final style = AppTranscationStyle.styles[type]!;
+                        final type = TransferType.values[index];
+                        final style = AppTransferStyle.styles[type]!;
                         final isSelected = currentType == type;
 
                         return InkWell(
@@ -303,7 +303,7 @@ class _AddTranferState extends State<AddTranferPage>{
                         labelStyle: AppFonts.beVietnamRegular12.
                         copyWith(color: AppColors.greyDarkest),
                         prefixIcon: selectedFromWallet!= null
-                          ? Image(image: AppTranscationStyle.styles[selectedFromWallet]!.icon!,
+                          ? Image(image: AppTransferStyle.styles[selectedFromWallet]!.icon!,
                             width: 16, height: 16,) : null,
                       ),
                       const SizedBox(height: 4,),
@@ -331,7 +331,7 @@ class _AddTranferState extends State<AddTranferPage>{
                         onTap: (){
                           setState(() {
                             String mid = fromWallet!.text;
-                            TransactionType? midStyle = selectedFromWallet;
+                            TransferType? midStyle = selectedFromWallet;
                             fromWallet!.text = toWallet!.text;
                             toWallet!.text = mid;
                             selectedFromWallet = selectedToWallet;
@@ -377,7 +377,7 @@ class _AddTranferState extends State<AddTranferPage>{
                         labelStyle: AppFonts.beVietnamRegular12.
                         copyWith(color: AppColors.greyDarkest),
                         prefixIcon: selectedToWallet!= null
-                            ? Image(image: AppTranscationStyle.styles[selectedToWallet]!.icon!,
+                            ? Image(image: AppTransferStyle.styles[selectedToWallet]!.icon!,
                           width: 16, height: 16,) : null,
                       ),
                       const SizedBox(height: 4,),
