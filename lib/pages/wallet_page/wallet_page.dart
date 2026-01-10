@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:quanlychitieu/pages/wallet_page/widgets/walletbox.dart';
 import 'package:quanlychitieu/utils/app_colors.dart';
+import 'package:quanlychitieu/utils/app_enums.dart';
 import 'package:quanlychitieu/utils/app_fonts.dart';
 import 'package:quanlychitieu/utils/app_gardients.dart';
 import 'package:quanlychitieu/utils/app_icons.dart';
@@ -99,6 +101,10 @@ class _WalletPageState extends State<WalletPage>{
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TotalBalanceBox(),
+              const SizedBox(height: 16,),
+              WalletBox(type: TransferType.cash),
+              WalletBox(type: TransferType.bank),
+              WalletBox(type: TransferType.wallet),
             ],
           ),
         )

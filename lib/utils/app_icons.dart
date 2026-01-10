@@ -29,6 +29,7 @@ class AppIcons {
   static const IconData shoppingCart = Icons.shopping_cart;
   static const IconData shoppingCartOutlined = Icons.shopping_cart_outlined;
 
+  //static const IconData menudots = Icons.menu
   static const IconData menu = Icons.menu;
   static const IconData menuBook = Icons.menu_book;
 

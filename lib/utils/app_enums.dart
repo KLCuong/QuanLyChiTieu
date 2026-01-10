@@ -102,10 +102,12 @@ enum TransferType{
 class TransferStyle{
   final String? title;
   final AssetImage? icon;
+  final Color? bgcolor;
 
   const TransferStyle({
     required this.icon,
-    required this.title
+    required this.title,
+    this.bgcolor = AppColors.white
   });
 }
 
@@ -113,15 +115,18 @@ class AppTransferStyle{
   static const Map<TransferType, TransferStyle> styles = {
     TransferType.cash: TransferStyle(
         icon: AppIcons.cash_png,
-        title: "Cash"
+        title: "Cash",
+        bgcolor: AppColors.mint
     ),
     TransferType.wallet: TransferStyle(
         icon: AppIcons.wallet_png,
-        title: "Wallet"
+        title: "E-Wallet",
+        bgcolor: AppColors.blueLight
     ),
     TransferType.bank: TransferStyle(
         icon: AppIcons.bank_png,
-        title: "Bank"
+        title: "Bank",
+        bgcolor: AppColors.purple
     ),
   };
 }
