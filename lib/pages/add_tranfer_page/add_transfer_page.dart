@@ -475,7 +475,7 @@ class _AddTranferState extends State<AddTranferPage>{
                         controller: note,
                         hintText: "Add a note",
                         hintStyle: AppFonts.beVietnamRegular12.
-                        copyWith(color: AppColors.greyDarkest),
+                        copyWith(color: AppColors.grey),
                         labelStyle: AppFonts.beVietnamRegular12.
                         copyWith(color: AppColors.greyDarkest),
                         maxLines: 7,

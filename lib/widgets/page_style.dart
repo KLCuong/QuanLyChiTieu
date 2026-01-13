@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:quanlychitieu/pages/add_tranfer_page/add_trans_page.dart';
+import 'package:quanlychitieu/pages/add_tranfer_page/add_transfer_page.dart';
 import 'package:quanlychitieu/routes/app_routes.dart';
 import 'package:quanlychitieu/utils/app_colors.dart';
 import 'package:quanlychitieu/widgets/custom_app_bar.dart';
