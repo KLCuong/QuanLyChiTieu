@@ -41,6 +41,11 @@ class AppIcons {
   static const IconData transfer = Icons.swap_horiz;
   static const IconData calender = Icons.calendar_today_outlined;
   static const IconData note = Icons.speaker_notes_outlined;
+  static const IconData download = Icons.download;
+  static const IconData upload = Icons.upload;
+  static const IconData profile = Icons.person;
+  static const IconData logout = Icons.logout;
+  static const IconData info = Icons.info;
 
   // Common Action Icons
   static const IconData add = Icons.add;

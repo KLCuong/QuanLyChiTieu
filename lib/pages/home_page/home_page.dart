@@ -3,6 +3,7 @@ import 'package:quanlychitieu/pages/add_tranfer_page/add_transfer_page.dart';
 import 'package:quanlychitieu/pages/add_transaction_page/add_transaction_page.dart';
 import 'package:quanlychitieu/pages/home_page/widgets/custom_tab_bar.dart';
 import 'package:quanlychitieu/pages/main_page/main_page.dart';
+import 'package:quanlychitieu/pages/profile_page/profile_page.dart';
 import 'package:quanlychitieu/pages/wallet_page/wallet_page.dart';
 import 'package:quanlychitieu/utils/app_colors.dart';
 import 'package:quanlychitieu/utils/app_icons.dart';
@@ -20,15 +21,25 @@ class HomePage extends StatefulWidget{
 class _HomeState extends State<HomePage>{
   //for tabbar
   int _currentIndex = 0;
-  final List<Widget> _pages = const[
-    MainPage(),
-    AddTranferPage(),
-    WalletPage(),
-    Center(child: Text('Profile'),),
-    AddTransactionPage()
-  ];
+  final List<Widget> _pages = [];
 
+  @override
+  void initState() {
+    super.initState();
+    _pages.addAll([
+      MainPage(),
+      AddTranferPage(),
+      WalletPage(),
+      ProfilePage(),
+      AddTransactionPage(onBackToHome: _goHome)
+    ]);
+  }
 
+  void _goHome(){
+    setState(() {
+      _currentIndex = 0;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
