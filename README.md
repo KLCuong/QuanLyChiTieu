@@ -15,7 +15,8 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 -----------------------------------------------------------------------
-## About App
+## About App 
+[All About App](https://docs.google.com/spreadsheets/d/1njMdrE2rd-ShpLnFu-vt0t20P1UEH3BZl3JMP7WkJi8/edit?usp=sharing)
 ### All Pages
 #### HOME (Dashboard – Trang chính)
 ##### Mục đích
