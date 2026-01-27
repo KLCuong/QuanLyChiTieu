@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:quanlychitieu/pages/home_page/home_page.dart';
+import 'package:quanlychitieu/pages/login_page/login_page.dart';
 import 'package:quanlychitieu/pages/splash_page.dart';
 import 'package:quanlychitieu/pages/transfer_history_page/transfer_history_page.dart';
 
@@ -50,6 +51,18 @@ final GoRouter goRouter = GoRouter(
                 transitionsBuilder: _slideTransition
             );
           }
+        ),
+        GoRoute(
+            path: AppRoute.login.path,
+            name: AppRoute.login.name,
+            pageBuilder: (context, state){
+              return CustomTransitionPage(
+                  key: state.pageKey,
+                  child: LoginPage(),
+                  transitionDuration: const Duration(milliseconds: 400),
+                  transitionsBuilder: _slideTransition
+              );
+            }
         ),
       ]
     )

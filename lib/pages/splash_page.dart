@@ -23,7 +23,8 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
 
     Timer(const Duration(seconds: 3),(){
-      context.go(AppRoute.home.path); //Xu ly de backpage ve /
+      context.go(AppRoute.login.path);
+      //context.go(AppRoute.home.path); //Xu ly de backpage ve /
     });
   }
 

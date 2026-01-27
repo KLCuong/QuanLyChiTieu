@@ -66,16 +66,16 @@ class _CustomPageState extends State<CustomPage>{
     return await showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text("Thoát ứng dụng?"),
-        content: const Text("Bạn có chắc muốn quay lại không?"),
+        title: const Text("Quit?"),
+        content: const Text("Wanna quit from the app?"),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text("Không"),
+            child: const Text("Nah"),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text("Có"),
+            child: const Text("Yes"),
           ),
         ],
       ),

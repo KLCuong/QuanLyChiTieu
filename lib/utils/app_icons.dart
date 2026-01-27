@@ -46,6 +46,7 @@ class AppIcons {
   static const IconData profile = Icons.person;
   static const IconData logout = Icons.logout;
   static const IconData info = Icons.info;
+  static const IconData showpassword = Icons.lock_outline;
 
   // Common Action Icons
   static const IconData add = Icons.add;
@@ -109,6 +110,6 @@ class AppIcons {
   static const AssetImage cash_png = AssetImage("assets/icons/cash.png");
   static const AssetImage bank_png = AssetImage("assets/icons/bank.png");
   static const AssetImage wallet_png = AssetImage("assets/icons/wallet.png");
-
+  static const AssetImage gmail_png = AssetImage("assets/icons/gmail_icon.png");
 
 }

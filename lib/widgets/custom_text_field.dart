@@ -28,6 +28,7 @@ class CustomTextField extends StatefulWidget{
   final void Function(String)? onChanged;
   final void Function(String)? onSubmitted;
   final VoidCallback? onTap;
+  final Color? backgroundColor;
   const CustomTextField({
     super.key,
     this.label,
@@ -54,7 +55,8 @@ class CustomTextField extends StatefulWidget{
     this.focusNode,
     this.onChanged,
     this.onSubmitted,
-    this.onTap
+    this.onTap,
+    this.backgroundColor
   });
 
   @override
