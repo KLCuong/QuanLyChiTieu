@@ -2,9 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:quanlychitieu/configs/supabase_keys.dart';
 import 'package:quanlychitieu/utils/app_colors.dart';
 import 'package:quanlychitieu/utils/app_fonts.dart';
 import 'package:quanlychitieu/widgets/page_style.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../routes/app_routes.dart';
 
@@ -18,14 +20,28 @@ class SplashPage extends StatefulWidget{
 }
 
 class _SplashPageState extends State<SplashPage> {
+
+  void _checkAuth() async{
+    await Future.delayed(const Duration(seconds: 3)); //why?
+    final supabase = Supabase.instance.client;
+    final user = supabase.auth.currentUser;
+
+    if(!mounted) return;
+    if(user != null){
+      //SignIn ok
+      print('User: ${user.email}');
+      print('Id: ${user.id}'); //Check?
+      context.go(AppRoute.home.path);
+    }else{
+      print('No User founded');
+      context.go(AppRoute.login.path);
+    }
+  }
+
   @override
   void initState(){
     super.initState();
-
-    Timer(const Duration(seconds: 3),(){
-      context.go(AppRoute.login.path);
-      //context.go(AppRoute.home.path); //Xu ly de backpage ve /
-    });
+    _checkAuth();
   }
 
   @override

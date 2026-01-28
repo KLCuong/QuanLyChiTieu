@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:quanlychitieu/routes/app_routes.dart';
+import 'package:quanlychitieu/services/remote/auth_service/auth_services.dart';
+import 'package:quanlychitieu/services/remote/errors/supabase_error_handler.dart';
 import 'package:quanlychitieu/utils/app_colors.dart';
 import 'package:quanlychitieu/utils/app_fonts.dart';
 import 'package:quanlychitieu/utils/app_gardients.dart';
@@ -24,14 +26,56 @@ class LoginPageState extends State<LoginPage>{
   bool _isLogin = true;
   String buttontitle = "Login";
 
+  final AuthService _authService = AuthService();
+
   void showPassword() {
     setState(() {
       _obscureText = !_obscureText;
     });
   }
 
-  void OnLoginTap(){
-    context.push(AppRoute.home.path);
+  bool checkingValid(){
+    String email = username!.text.trim();
+    String pass = password!.text.trim();
+    if(email == '' || pass == ''){
+      return false;
+    }else {
+      return true;
+    }
+  }
+
+  void OnLoginTap() async{
+    bool check = checkingValid();
+    if(check == false){
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Please fill your username and password")),
+      );
+    }else{
+      try{
+        if (_isLogin) {
+          //On login session
+          await _authService.login(
+              email: username!.text.trim(),
+              password: password!.text.trim()
+          );
+        } else {
+          //On signup session
+          await _authService.signUp(
+            email: username!.text.trim(),
+            password: password!.text.trim(),
+            fullName: fullname!.text.trim(),
+          );
+        }
+        if (!mounted) return;
+        context.go(AppRoute.home.path);
+      }catch (e) {
+        final error = SupabaseErrorHandler.handle(e);
+        print(error);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(error.message.toString())),
+        );
+      }
+    }
   }
 
   void getToSignUp(){
