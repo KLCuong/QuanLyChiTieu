@@ -4,7 +4,6 @@ class UserProfile {
   final String? avatarUrl;
   final String? phoneNumber;
   final DateTime? dateOfBirth;
-  final String? gender;
   final String? address;
   final String role;
   final DateTime createdAt;
@@ -16,7 +15,6 @@ class UserProfile {
     this.avatarUrl,
     this.phoneNumber,
     this.dateOfBirth,
-    this.gender,
     this.address,
     required this.role,
     required this.createdAt,
@@ -32,7 +30,6 @@ class UserProfile {
       dateOfBirth: json['date_of_birth'] != null
           ? DateTime.parse(json['date_of_birth'])
           : null,
-      gender: json['gender'],
       address: json['address'],
       role: json['role'] ?? 'user',
       createdAt: DateTime.parse(json['created_at']),

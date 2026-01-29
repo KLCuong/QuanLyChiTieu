@@ -4,6 +4,7 @@ import 'package:quanlychitieu/pages/home_page/home_page.dart';
 import 'package:quanlychitieu/pages/login_page/login_page.dart';
 import 'package:quanlychitieu/pages/splash_page.dart';
 import 'package:quanlychitieu/pages/transfer_history_page/transfer_history_page.dart';
+import 'package:quanlychitieu/pages/first_update_profile_page/first_update_profile_page.dart';
 
 import 'app_routes.dart';
 
@@ -59,6 +60,18 @@ final GoRouter goRouter = GoRouter(
               return CustomTransitionPage(
                   key: state.pageKey,
                   child: LoginPage(),
+                  transitionDuration: const Duration(milliseconds: 400),
+                  transitionsBuilder: _slideTransition
+              );
+            }
+        ),
+        GoRoute(
+            path: AppRoute.update_profile.path,
+            name: AppRoute.update_profile.name,
+            pageBuilder: (context, state){
+              return CustomTransitionPage(
+                  key: state.pageKey,
+                  child: FirstUpdateProfilePage(),
                   transitionDuration: const Duration(milliseconds: 400),
                   transitionsBuilder: _slideTransition
               );

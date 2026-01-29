@@ -7,11 +7,13 @@ class CustomAppButton extends StatefulWidget{
   final double? width, height;
   final VoidCallback? onTap;
   final Color? background;
+  final double? borderRadius;
   const CustomAppButton({
     super.key,
     required this.title,
     required this.onTap,
     this.width, this.height,
+    this.borderRadius = 16,
     this.background = AppColors.mint
   });
 
@@ -32,7 +34,7 @@ class ButtonAppState extends State<CustomAppButton>{
         height: widget.height,
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(widget.borderRadius!),
             color:  widget.background
         ),
         child: Center(child: Text(

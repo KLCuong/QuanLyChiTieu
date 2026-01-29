@@ -260,7 +260,7 @@ class _AddTranferState extends State<AddTranferPage>{
                         color: AppColors.grey, size: 12,),
                       onTap: (){
                         //navigate to transfer history
-                        context!.push(AppRoute.transfer_history.path); //stack vao route
+                        context.push(AppRoute.transfer_history.path); //stack vao route
                       },
                     ),
                   ),

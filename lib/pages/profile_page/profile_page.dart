@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:quanlychitieu/pages/add_tranfer_page/add_transfer_page.dart';
 import 'package:quanlychitieu/pages/profile_page/widgets/setting_items.dart';
+import 'package:quanlychitieu/routes/app_routes.dart';
+import 'package:quanlychitieu/services/remote/auth%20service/auth_services.dart';
+import 'package:quanlychitieu/services/remote/auth%20service/google%20auth/google_auth_service.dart';
 import 'package:quanlychitieu/utils/app_colors.dart';
 import 'package:quanlychitieu/utils/app_fonts.dart';
 import 'package:quanlychitieu/utils/app_gardients.dart';
@@ -16,6 +21,13 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage>{
 
   final settingsGroups = AppSettingData.settingsGroups;
+  final auth = AuthService();
+
+  void Logout() async{
+    //Dialog ask to logout
+    await auth.logout();
+    context.go(AppRoute.login.path);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +37,7 @@ class _ProfilePageState extends State<ProfilePage>{
       child: ListView(
         padding: const EdgeInsets.only(bottom: 24),
         children: [
-          /// 🔹 HEADER
+          /// HEADER
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
             decoration: const BoxDecoration(
@@ -215,32 +227,35 @@ class _ProfilePageState extends State<ProfilePage>{
 
           const SizedBox(height: 16),
 
-          /// 🔹 LOGOUT
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 16),
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            decoration: BoxDecoration(
-              color: AppColors.cardBackground,
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: AppColors.greyVeryLight),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(AppIcons.logout, color: AppColors.error),
-                const SizedBox(width: 8),
-                Text(
-                  'Logout',
-                  style: AppFonts.beVietnamSemiBold16
-                      .copyWith(color: AppColors.error),
-                ),
-              ],
+          /// LOGOUT
+          GestureDetector(
+            onTap: Logout,
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              decoration: BoxDecoration(
+                color: AppColors.cardBackground,
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: AppColors.greyVeryLight),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(AppIcons.logout, color: AppColors.error),
+                  const SizedBox(width: 8),
+                  Text(
+                    'Logout',
+                    style: AppFonts.beVietnamSemiBold16
+                        .copyWith(color: AppColors.error),
+                  ),
+                ],
+              ),
             ),
           ),
 
           const SizedBox(height: 24),
 
-          /// 🔹 FOOTER
+          /// FOOTER
           Column(
             children: [
               Text(

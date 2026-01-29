@@ -25,6 +25,9 @@ class AppRoute{
     name: 'Login_Page',
     path: '/login'
   );
-
-  static List<AppRouteInfo> get all => [splash, home, transfer_history, login];
+  static const update_profile = AppRouteInfo(
+      name: 'Profile_Update_Page',
+      path: '/profile_update_page'
+  );
+  static List<AppRouteInfo> get all => [splash, home, transfer_history, login, update_profile];
 }

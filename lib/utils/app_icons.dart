@@ -111,5 +111,7 @@ class AppIcons {
   static const AssetImage bank_png = AssetImage("assets/icons/bank.png");
   static const AssetImage wallet_png = AssetImage("assets/icons/wallet.png");
   static const AssetImage gmail_png = AssetImage("assets/icons/gmail_icon.png");
+  static const AssetImage google_png = AssetImage("assets/icons/google_icon.png");
+
 
 }

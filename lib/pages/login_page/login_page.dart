@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:quanlychitieu/routes/app_routes.dart';
-import 'package:quanlychitieu/services/remote/auth_service/auth_services.dart';
+import 'package:quanlychitieu/services/remote/auth service/auth_services.dart';
 import 'package:quanlychitieu/services/remote/errors/supabase_error_handler.dart';
 import 'package:quanlychitieu/utils/app_colors.dart';
 import 'package:quanlychitieu/utils/app_fonts.dart';
@@ -44,6 +44,23 @@ class LoginPageState extends State<LoginPage>{
     }
   }
 
+  void onGoogleTouch() async{
+    try{
+      final user = await _authService.signInWithGoogle();
+      if (user != null) {
+        //Check if no profile fill -> updateprofile
+        context.go(AppRoute.update_profile.path);
+        //context.go(AppRoute.home.path);
+      }
+    }catch  (e) {
+      final error = SupabaseErrorHandler.handle(e);
+      print(error);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(error.message.toString())),
+      );
+    }
+  }
+
   void OnLoginTap() async{
     bool check = checkingValid();
     if(check == false){
@@ -67,6 +84,7 @@ class LoginPageState extends State<LoginPage>{
           );
         }
         if (!mounted) return;
+        //Check if no profile fill -> updateprofile
         context.go(AppRoute.home.path);
       }catch (e) {
         final error = SupabaseErrorHandler.handle(e);
@@ -191,9 +209,9 @@ class LoginPageState extends State<LoginPage>{
                       ),
                         padding: const EdgeInsets.all(8),
                         child: GestureDetector(
-                          onTap: (){print("Ckick");},
+                          onTap: onGoogleTouch,
                           child: const Image(
-                            image: AppIcons.gmail_png,
+                            image: AppIcons.google_png,
                             width: 36, height: 36,
                           ),
                         )
