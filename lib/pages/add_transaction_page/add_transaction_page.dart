@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:quanlychitieu/models/user_profile.dart';
 import 'package:quanlychitieu/models/transaction.dart';
+import 'package:quanlychitieu/services/remote/errors/supabase_error_handler.dart';
 import 'package:quanlychitieu/services/remote/transaction_service/trans_services.dart';
 import 'package:quanlychitieu/pages/add_tranfer_page/add_transfer_page.dart';
 import 'package:quanlychitieu/pages/add_transaction_page/widgets/catergories_grid.dart';
 import 'package:quanlychitieu/pages/add_transaction_page/widgets/wallet_type_sheet.dart';
+import 'package:quanlychitieu/services/remote/wallet_service/wallet_services.dart';
 import 'package:quanlychitieu/utils/app_colors.dart';
 import 'package:quanlychitieu/utils/app_enums.dart';
 import 'package:quanlychitieu/utils/app_fonts.dart';
@@ -39,8 +41,10 @@ class _AddTransState extends State<AddTransactionPage>{
   TextEditingController? wallet = TextEditingController(
     text: AppTransferStyle.styles[TransferType.wallet]!.title,
   );
+  String? avaiable = "0";
 
   final TransactionService _transactionService = TransactionService();
+  final _walletService = WalletService();
 
   void openFromWalletSelector() {
     showModalBottomSheet(
@@ -51,10 +55,29 @@ class _AddTransState extends State<AddTransactionPage>{
           setState(() {
             transferType = type;
             wallet!.text = AppTransferStyle.styles[type]?.title ?? "";
+            getAmountAvaiable(wallet!.text.trim().toString());
           });
         },
       ),
     );
+  }
+
+  void getAmountAvaiable(String type) async{
+    String walletType = type.toLowerCase();
+    try{
+      final amount = await _walletService.getWalletBalance(walletType);
+      if(amount != null){
+        setState(() {
+          avaiable = amount.toString();
+        });
+      }
+    }catch (e){
+      final error = SupabaseErrorHandler.handle(e);
+      print(error);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(error.message.toString())),
+      );
+    }
   }
 
   //Date Picker
@@ -79,11 +102,24 @@ class _AddTransState extends State<AddTransactionPage>{
 
   void checkCanSave(){
     if (amount!.text == "") amount!.text= "0";
-    int? money = int.parse(amount!.text.toString());
+    double? money = double.parse(amount!.text.toString());
     if(money != null && money > 0 && selectedTrans != null) {
-      setState(() {
-        canSave = true;
-      });
+      if(selectedIndex == 0 ){
+        if(money <= double.parse(avaiable.toString())){
+          setState(() {
+            canSave = true;
+          });
+        }else{
+          setState(() {
+            canSave = false;
+          });
+        }
+      }else{
+        setState(() {
+          canSave = true;
+        });
+      }
+
     } else {
       setState(() {
         canSave = false;
@@ -218,6 +254,7 @@ class _AddTransState extends State<AddTransactionPage>{
   @override
   void initState() {
     super.initState();
+    getAmountAvaiable(AppTransferStyle.styles[transferType]!.title!.toString());
     amountFocus.addListener((){
       if (!amountFocus.hasFocus) {
         checkCanSave();
@@ -336,6 +373,23 @@ class _AddTransState extends State<AddTransactionPage>{
                         width: 16, height: 16,) : null,
                       suffixIcon: transferType!= null
                           ? const Icon(AppIcons.arrowDown, size: 16,) : null,
+                    ),
+                    const SizedBox(height: 4,),
+                    Text.rich(
+                        TextSpan(
+                            children: [
+                              TextSpan(
+                                text: "Available:  ",
+                                style: AppFonts.beVietnamRegular12.
+                                copyWith(color: AppColors.grey),
+                              ),
+                              TextSpan(
+                                text: "${avaiable} \$",
+                                style: AppFonts.beVietnamRegular12.
+                                copyWith(color: AppColors.greyDarkest),
+                              )
+                            ]
+                        )
                     ),
                     //Date
                     const SizedBox(height: 20,),

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:quanlychitieu/models/transfer.dart';
 import 'package:quanlychitieu/models/user_profile.dart';
 import 'package:quanlychitieu/routes/app_routes.dart';
+import 'package:quanlychitieu/services/remote/errors/supabase_error_handler.dart';
+import 'package:quanlychitieu/services/remote/transfer_service/transfer_services.dart';
+import 'package:quanlychitieu/services/remote/wallet_service/wallet_services.dart';
 import 'package:quanlychitieu/utils/app_colors.dart';
 import 'package:quanlychitieu/utils/app_enums.dart';
 import 'package:quanlychitieu/utils/app_fonts.dart';
@@ -35,6 +39,9 @@ class _AddTranferState extends State<AddTranferPage>{
   String? availableFrom = "100 \$";
   String? availableTo = "0 \$";
 
+  final transferService = TransferService();
+  final walletService = WalletService();
+
   //Date Picker
   DateTime? predate = DateTime.now();
   Future<void> _selectDate(BuildContext context) async {
@@ -55,9 +62,42 @@ class _AddTranferState extends State<AddTranferPage>{
     }
   }
 
+  void createTransfer() async{
+    final userId = widget.userProfile!.id;
+    final transfer = Transfer(
+      id: '',
+      userId: userId.toString(),
+      fromWallet: fromWallet!.text.trim().toString().toLowerCase(),
+      toWallet: toWallet!.text.trim().toString().toLowerCase(),
+      amount: double.parse(amount!.text.trim()),
+      date: predate!,
+      createdAt: DateTime.now()
+    );
+    try{
+      bool check = await transferService.createTransfer(transfer);
+      if(check){
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Transfer saved successfully!"),
+            backgroundColor: AppColors.mintDark,
+          )
+        );
+      }
+    }catch  (e) {
+      final error = SupabaseErrorHandler.handle(e);
+      print(error);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(error.message.toString())),
+      );
+    }
+
+  }
+
   Widget confirmButton(){
     return InkWell(
-      onTap: (){},
+      onTap: (){
+        createTransfer();
+      },
       highlightColor: Colors.transparent,
       hoverColor: Colors.transparent,
       focusColor: Colors.transparent,
@@ -77,6 +117,28 @@ class _AddTranferState extends State<AddTranferPage>{
         ),
       ),
     );
+  }
+
+  void getAmountAvaiable(String type, {bool from = true}) async{
+    String walletType = type.toLowerCase();
+    try{
+      final amount = await walletService.getWalletBalance(walletType);
+      if(amount != null){
+        setState(() {
+          if(from) {
+            availableFrom = amount.toString();
+          } else {
+            availableTo = amount.toString();
+          }
+        });
+      }
+    }catch (e){
+      final error = SupabaseErrorHandler.handle(e);
+      print(error);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(error.message.toString())),
+      );
+    }
   }
 
   void showPopupMenu(
@@ -132,11 +194,16 @@ class _AddTranferState extends State<AddTranferPage>{
                         return InkWell(
                           onTap: () {
                             Navigator.pop(context);
+                            getAmountAvaiable(style.title!.toString(), from: from!);
                             setState(() {
-                              if(from == true) selectedFromWallet = type;
-                              else selectedToWallet = type;
+                              if(from == true) {
+                                selectedFromWallet = type;
+                              } else {
+                                selectedToWallet = type;
+                              }
                             });
                             controller?.text = style.title ?? "";
+
                           },
                           child: Container(
                             padding: const EdgeInsets.symmetric(
@@ -195,11 +262,34 @@ class _AddTranferState extends State<AddTranferPage>{
 
   void getMaxAmount(){
     String amountS = availableFrom!;
-    String get = amountS.substring(0, amountS.length - 4);
+    String get = amountS.substring(0, amountS.length);
     setState(() {
       amount!.text = get;
     });
 
+  }
+
+  @override
+  void initState() {
+    getAmountAvaiable(AppTransferStyle.styles[selectedFromWallet]!.title.toString());
+    getAmountAvaiable(AppTransferStyle.styles[selectedToWallet]!.title.toString(), from: false);
+    super.initState();
+  }
+
+  void reverseWallet(){
+    setState(() {
+      String mid = fromWallet!.text;
+      TransferType? midStyle = selectedFromWallet;
+      fromWallet!.text = toWallet!.text;
+      toWallet!.text = mid;
+      selectedFromWallet = selectedToWallet;
+      selectedToWallet = midStyle;
+
+      String? mid2 = availableFrom;
+      availableFrom = availableTo;
+      availableTo = mid2;
+    });
+    getMaxAmount();
   }
 
   @override
@@ -328,14 +418,7 @@ class _AddTranferState extends State<AddTranferPage>{
                         highlightColor: Colors.transparent,
                         focusColor: Colors.transparent,
                         onTap: (){
-                          setState(() {
-                            String mid = fromWallet!.text;
-                            TransferType? midStyle = selectedFromWallet;
-                            fromWallet!.text = toWallet!.text;
-                            toWallet!.text = mid;
-                            selectedFromWallet = selectedToWallet;
-                            selectedToWallet = midStyle;
-                          });
+                          reverseWallet();
                         },
                         child: Container(
                           margin: const EdgeInsets.symmetric(vertical: 4),

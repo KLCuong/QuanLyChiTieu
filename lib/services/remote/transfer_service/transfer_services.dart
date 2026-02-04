@@ -32,7 +32,7 @@ class TransferService {
   }
 
   /// CREATE TRANSFER
-  Future<void> createTransfer(Transfer transfer) async {
+  Future<bool> createTransfer(Transfer transfer) async {
     final user = _client.auth.currentUser;
     if (user == null) throw Exception("User not logged in");
 
@@ -40,6 +40,7 @@ class TransferService {
       ...transfer.toJson(),
       'user_id': user.id,
     });
+    return true;
   }
 
   /// DELETE TRANSFER
