@@ -68,7 +68,7 @@ class _TransferBState extends State<TransferBubble>{
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               FromToWidget(),
-              Text("${widget.amount} VND", style: AppFonts.beVietnamRegular14.
+              Text("${widget.amount} \$", style: AppFonts.beVietnamRegular14.
                 copyWith(color: AppColors.blue), textAlign: TextAlign.end,),
             ],
           ),

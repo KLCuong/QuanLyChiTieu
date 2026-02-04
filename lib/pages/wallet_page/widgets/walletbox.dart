@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:quanlychitieu/services/remote/wallet_service/wallet_services.dart';
 import 'package:quanlychitieu/utils/app_colors.dart';
 import 'package:quanlychitieu/utils/app_enums.dart';
 import 'package:quanlychitieu/utils/app_fonts.dart';
@@ -7,9 +8,11 @@ import 'package:quanlychitieu/utils/app_icons.dart';
 
 class WalletBox extends StatefulWidget{
   final TransferType? type;
+  final VoidCallback? onUpdated;
   const WalletBox({
     super.key,
-    required this.type
+    required this.type,
+    this.onUpdated,
   });
 
   @override
@@ -17,6 +20,10 @@ class WalletBox extends StatefulWidget{
 }
 
 class _WalletBoxState extends State<WalletBox>{
+  double amount = 0;
+  bool _isLoading = true;
+  final walletService = WalletService();
+
   Widget IconBox(){
     return Container(
       width: 48, height: 48,
@@ -31,9 +38,9 @@ class _WalletBoxState extends State<WalletBox>{
 
   void showUpdateDialog() {
     final TextEditingController nameController =
-    TextEditingController(text: 'E-Wallet');
+    TextEditingController(text: AppTransferStyle.styles[widget.type]!.title!);
     final TextEditingController balanceController =
-    TextEditingController(text: '3200000');
+    TextEditingController(text: amount.toString());
 
     showCupertinoDialog<void>(
       context: context,
@@ -109,10 +116,9 @@ class _WalletBoxState extends State<WalletBox>{
             isDefaultAction: true,
             child: const Text('Save', style: AppFonts.beVietnamRegular14,),
             onPressed: () {
-              final name = nameController.text;
-              final balance = balanceController.text;
-
-              // TODO: xử lý update wallet
+              final name = nameController.text.trim();
+              final balance = double.parse(balanceController.text.trim());
+              updateWallet(balance, nameController.text.toLowerCase());
               Navigator.of(context).pop();
             },
           ),
@@ -120,7 +126,28 @@ class _WalletBoxState extends State<WalletBox>{
       ),
     );
   }
+  void updateWallet(double newBalance, String type)async{
+    await walletService.updateWalletBalance(walletType: type, newTotal: newBalance);
+    getDirectAmount();
+    widget.onUpdated?.call();
+  }
 
+  void getDirectAmount() async{
+    String typ = AppTransferStyle.styles[widget.type]!.title!;
+    final total = await walletService.getWalletBalance(typ.toLowerCase());
+    if(total != null){
+      setState(() {
+        amount = total;
+        _isLoading = false;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    getDirectAmount();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -131,7 +158,8 @@ class _WalletBoxState extends State<WalletBox>{
         borderRadius: BorderRadius.circular(16),
         color: AppColors.white,
       ),
-      child: Row(
+      child: (_isLoading)? const Center(child: CircularProgressIndicator(),) :
+      Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
 
@@ -144,9 +172,9 @@ class _WalletBoxState extends State<WalletBox>{
               children: [
                 Text(AppTransferStyle.styles[widget.type]!.title!, style: AppFonts.beVietnamRegular14.
                 copyWith(color: AppColors.greyDarkest), textAlign: TextAlign.start,),
-                Text('5 transactions', style: AppFonts.beVietnamRegular12.
-                copyWith(color: AppColors.grey), textAlign: TextAlign.start,),
-                Text('100,000 VND', style: AppFonts.beVietnamRegular16.
+                // Text('5 transactions', style: AppFonts.beVietnamRegular12.
+                // copyWith(color: AppColors.grey), textAlign: TextAlign.start,),
+                Text(amount.toString(), style: AppFonts.beVietnamRegular16.
                 copyWith(color: AppColors.greyDarkest), textAlign: TextAlign.start,),
               ],
             ),
@@ -155,8 +183,8 @@ class _WalletBoxState extends State<WalletBox>{
             hoverColor: Colors.transparent,
             highlightColor: Colors.transparent,
             focusColor: Colors.transparent,
-            child: const Icon(AppIcons.edit, size: 16, color: AppColors.grey,),
             onTap: showUpdateDialog,
+            child: const Icon(AppIcons.edit, size: 16, color: AppColors.grey,),
           ),
 
         ],

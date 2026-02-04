@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quanlychitieu/models/transaction.dart';
 import 'package:quanlychitieu/models/user_profile.dart';
 import 'package:quanlychitieu/pages/main_page/widgets/money_card.dart';
-import 'package:quanlychitieu/services/remote/transaction%20service/trans_services.dart';
+import 'package:quanlychitieu/services/remote/transaction_service/trans_services.dart';
 import 'package:quanlychitieu/utils/app_colors.dart';
 import 'package:quanlychitieu/utils/app_fonts.dart';
 import 'package:quanlychitieu/utils/app_icons.dart';
@@ -218,7 +218,7 @@ class _MainState extends State<MainPage>{
                       return CustomBoxItem(
                         title: transaction.category,
                         description: transaction.note ?? "No description",
-                        total: amount.substring(0, amount.length - 2),
+                        total: amount,
                         leftIcon: Icon(style.icon, color: style.iconColor,),
                         boxColor: style.backgroundColor,
                         date: transaction.date,

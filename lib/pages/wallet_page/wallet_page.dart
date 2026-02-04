@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:quanlychitieu/models/user_profile.dart';
 import 'package:quanlychitieu/pages/wallet_page/widgets/walletbox.dart';
+import 'package:quanlychitieu/services/remote/wallet_service/wallet_services.dart';
 import 'package:quanlychitieu/utils/app_colors.dart';
 import 'package:quanlychitieu/utils/app_enums.dart';
 import 'package:quanlychitieu/utils/app_fonts.dart';
@@ -20,15 +21,39 @@ class WalletPage extends StatefulWidget{
 }
 
 class _WalletPageState extends State<WalletPage>{
+  final walletService = WalletService();
+  String totalAmount = "0";
+  bool _isLoading = true;
+
+
+  void getTotalAmount() async{
+   final amount = await walletService.getTotalAmount();
+   if(amount != null){
+     setState(() {
+       totalAmount = amount.toString();
+       _isLoading = false;
+     });
+   }
+  }
+
+  Future<void> reloadWalletPage() async {
+    setState(() {
+      _isLoading = true;
+    });
+    getTotalAmount();
+  }
+
 
   Widget TotalBalanceBox(){
     return Container(
       padding: const EdgeInsets.fromLTRB(16,16,16,24),
+      width: double.infinity,
       decoration: BoxDecoration(
         gradient: AppGradients.box,
         borderRadius: BorderRadius.circular(16),
       ),
-      child: Row(
+      child: (_isLoading)? const Center(child: CircularProgressIndicator()):
+      Row(
         children: [
           Container(
             width: 48, height: 48,
@@ -56,7 +81,7 @@ class _WalletPageState extends State<WalletPage>{
               ),
               RichText(
                 text: TextSpan(
-                  text: "100.000.000",
+                  text: totalAmount,
                   style: AppFonts.robotoMedium32.copyWith(color: AppColors.white),
                   children: [
                     TextSpan(
@@ -73,6 +98,12 @@ class _WalletPageState extends State<WalletPage>{
         ],
       ),
     );
+  }
+
+  @override
+  void initState() {
+    getTotalAmount();
+    super.initState();
   }
 
   @override
@@ -106,9 +137,18 @@ class _WalletPageState extends State<WalletPage>{
             children: [
               TotalBalanceBox(),
               const SizedBox(height: 16,),
-              WalletBox(type: TransferType.cash),
-              WalletBox(type: TransferType.bank),
-              WalletBox(type: TransferType.wallet),
+              WalletBox(
+                type: TransferType.cash,
+                onUpdated: reloadWalletPage,
+              ),
+              WalletBox(
+                type: TransferType.bank,
+                onUpdated: reloadWalletPage,
+              ),
+              WalletBox(
+                type: TransferType.wallet,
+                onUpdated: reloadWalletPage,
+              ),
             ],
           ),
         )
