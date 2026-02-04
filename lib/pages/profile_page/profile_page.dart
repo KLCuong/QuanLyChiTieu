@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:quanlychitieu/models/user_profile.dart';
 import 'package:quanlychitieu/pages/add_tranfer_page/add_transfer_page.dart';
 import 'package:quanlychitieu/pages/profile_page/widgets/setting_items.dart';
 import 'package:quanlychitieu/routes/app_routes.dart';
@@ -9,10 +10,15 @@ import 'package:quanlychitieu/utils/app_colors.dart';
 import 'package:quanlychitieu/utils/app_fonts.dart';
 import 'package:quanlychitieu/utils/app_gardients.dart';
 import 'package:quanlychitieu/utils/app_icons.dart';
+import 'package:quanlychitieu/widgets/custom_app_dialog.dart';
 
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+  final UserProfile? userProfile;
+  const ProfilePage({
+    super.key,
+    this.userProfile
+  });
 
   @override
   State createState() => _ProfilePageState();
@@ -25,8 +31,15 @@ class _ProfilePageState extends State<ProfilePage>{
 
   void Logout() async{
     //Dialog ask to logout
-    await auth.logout();
-    context.go(AppRoute.login.path);
+    CustomConfirmDialog.show(
+      context,
+      title: "Logout",
+      content: "Are you sure want to logout?",
+      onYes: () async {
+        bool check = await auth.logout();
+        if(check == true)context.go(AppRoute.login.path);
+      }
+    );
   }
 
   @override
@@ -102,13 +115,13 @@ class _ProfilePageState extends State<ProfilePage>{
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'John Doe',
+                      widget.userProfile!.fullName?? "User",
                       style: AppFonts.beVietnamBold18
                           .copyWith(color: AppColors.white),
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'john.doe@example.com',
+                      widget.userProfile!.email?? "No email yet",
                       style: AppFonts.beVietnamRegular14
                           .copyWith(color: AppColors.white.withOpacity(0.8)),
                     ),

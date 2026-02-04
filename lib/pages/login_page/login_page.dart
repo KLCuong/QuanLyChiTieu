@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:quanlychitieu/models/user_profile.dart';
 import 'package:quanlychitieu/routes/app_routes.dart';
 import 'package:quanlychitieu/services/remote/auth service/auth_services.dart';
 import 'package:quanlychitieu/services/remote/errors/supabase_error_handler.dart';
@@ -23,7 +24,10 @@ class LoginPageState extends State<LoginPage>{
   TextEditingController? password = TextEditingController(text: "");
   TextEditingController? fullname = TextEditingController(text: "");
   bool _obscureText = true;
-  bool _isLogin = true;
+  int type = 0;
+  // 0 - login
+  // 1 - signup
+  // 2 - forgot password
   String buttontitle = "Login";
 
   final AuthService _authService = AuthService();
@@ -48,8 +52,12 @@ class LoginPageState extends State<LoginPage>{
     try{
       final user = await _authService.signInWithGoogle();
       if (user != null) {
-        //Check if no profile fill -> updateprofile
-        context.go(AppRoute.update_profile.path);
+        final profile = await _authService.getUserProfile();
+        if(profile != null) {
+          context.go(AppRoute.home.path);
+        } else {
+          context.go(AppRoute.update_profile.path);
+        }
         //context.go(AppRoute.home.path);
       }
     }catch  (e) {
@@ -61,46 +69,64 @@ class LoginPageState extends State<LoginPage>{
     }
   }
 
-  void OnLoginTap() async{
-    bool check = checkingValid();
-    if(check == false){
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Please fill your username and password")),
-      );
-    }else{
-      try{
-        if (_isLogin) {
-          //On login session
+  void OnConfirmButtonTap() async{
+    try{
+      if (type == 0) {
+        //On login session
+        bool check = checkingValid();
+        if(check == false){
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("Please fill your username and password")),
+          );
+        }else{
           await _authService.login(
               email: username!.text.trim(),
               password: password!.text.trim()
           );
+          final user = _authService.currentUser;
+          if(user!.id != null) context.go(AppRoute.home.path);
+        }
+      } else if(type == 1) {
+        //On signup session
+        await _authService.signUp(
+          email: username!.text.trim(),
+          password: password!.text.trim(),
+          fullName: fullname!.text.trim(),
+        );
+        final user = _authService.currentUser;
+        if(user!.id != null) context.go(AppRoute.home.path);
+      }else if(type == 2){
+        //On request password session
+        String? req_email = username!.text.trim();
+        if(req_email != null) {
+          context.pushNamed(AppRoute.otp.name, extra: req_email);
         } else {
-          //On signup session
-          await _authService.signUp(
-            email: username!.text.trim(),
-            password: password!.text.trim(),
-            fullName: fullname!.text.trim(),
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text("Please enter the correct email"),)
           );
         }
-        if (!mounted) return;
-        //Check if no profile fill -> updateprofile
-        context.go(AppRoute.home.path);
-      }catch (e) {
-        final error = SupabaseErrorHandler.handle(e);
-        print(error);
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(error.message.toString())),
-        );
       }
+      if (!mounted) return;
+
+    }catch (e) {
+      final error = SupabaseErrorHandler.handle(e);
+      print(error);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(error.message.toString())),
+      );
     }
+
   }
 
   void getToSignUp(){
     setState(() {
-      _isLogin = !_isLogin;
-      if(_isLogin == true) buttontitle = "Login";
-      else buttontitle = "Sign up";
+      if(type == 0) {
+        type = 1;
+        buttontitle = "Sign up";
+      }else {
+        type = 0;
+        buttontitle = "Login";
+      }
     });
   }
 
@@ -133,27 +159,36 @@ class LoginPageState extends State<LoginPage>{
                     .copyWith(color: AppColors.white), textAlign: TextAlign.center,),
               Text("Login to start managing", style: AppFonts.beVietnamRegular12
                     .copyWith(color: AppColors.white), textAlign: TextAlign.center,),
-
               const SizedBox(height: 32,),
-              CustomTextField(
-                filled: true,
-                hintText: "Username",
-                fillColor: AppColors.white,
-                controller: username,
-              ),
-              const SizedBox(height: 16,),
-              CustomTextField(
-                hintText: "Password",
-                filled: true,
-                fillColor: AppColors.white,
-                controller: password,
-                obscureText: _obscureText,
-                suffixIcon: GestureDetector(
-                  onTap: showPassword,
-                  child: const Icon(AppIcons.showpassword, size: 16,),
-                )
-              ),
-              if(!_isLogin)...[
+              if(type != 2)...[
+                CustomTextField(
+                  filled: true,
+                  hintText: "Username",
+                  fillColor: AppColors.white,
+                  controller: username,
+                ),
+                const SizedBox(height: 16,),
+                CustomTextField(
+                    hintText: "Password",
+                    filled: true,
+                    fillColor: AppColors.white,
+                    controller: password,
+                    obscureText: _obscureText,
+                    suffixIcon: GestureDetector(
+                      onTap: showPassword,
+                      child: const Icon(AppIcons.showpassword, size: 16,),
+                    )
+                ),
+              ]else ...[
+                CustomTextField(
+                    hintText: "Email",
+                    filled: true,
+                    fillColor: AppColors.white,
+                    controller: username,
+                ),
+              ],
+
+              if(type == 1)...[
                 const SizedBox(height: 16,),
                 CustomTextField(
                     hintText: "Fullname",
@@ -161,11 +196,17 @@ class LoginPageState extends State<LoginPage>{
                     fillColor: AppColors.white,
                     controller: fullname,
                 ),
-              ]else...[
+              ]else if(type == 0)...[
                 const SizedBox(height: 8,),
                 Align(
                   alignment: Alignment.centerRight,
                   child: GestureDetector(
+                    onTap: (){
+                      setState(() {
+                        type = 2;
+                        buttontitle = "Get verify email";
+                      });
+                    },
                     child: Text(
                       "Forgot password?", style: AppFonts.beVietnamRegular14
                         .copyWith(color: AppColors.white),
@@ -178,18 +219,19 @@ class LoginPageState extends State<LoginPage>{
                 width: double.infinity,
                 height: 48,
                 title: buttontitle,
-                onTap: OnLoginTap,
+                onTap: OnConfirmButtonTap,
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Don't have an acount?  ",
+                  Text((type == 0)?"Don't have an acount?  ": "Already have an account?  ",
                     style: AppFonts.beVietnamRegular14.copyWith(color: AppColors.white),
                   ),
                   GestureDetector(
                     onTap: getToSignUp,
-                    child: Text( "Sign up here",style: AppFonts.beVietnamMedium16.copyWith(color: AppColors.white,
+                    child: Text( (type == 0)?"Sign up here": "Sign in here",
+                        style: AppFonts.beVietnamMedium16.copyWith(color: AppColors.white,
                         decoration: TextDecoration.underline, decorationColor: AppColors.white)),
                   ),
                 ],

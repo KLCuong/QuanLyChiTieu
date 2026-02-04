@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:quanlychitieu/configs/supabase_keys.dart';
+import 'package:quanlychitieu/routes/app_routes.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'routes/app_router.dart';
 
@@ -14,7 +16,6 @@ void main() async{
       url: SupabaseKeys.supa_url,
       anonKey: SupabaseKeys.supa_anon_key
   );
-
   runApp(const MyApp());
 }
 

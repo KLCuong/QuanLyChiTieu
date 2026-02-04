@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:quanlychitieu/pages/home_page/home_page.dart';
 import 'package:quanlychitieu/pages/login_page/login_page.dart';
+import 'package:quanlychitieu/pages/set_new_password_page/email_otp_page.dart';
+import 'package:quanlychitieu/pages/set_new_password_page/new_password_page.dart';
 import 'package:quanlychitieu/pages/splash_page.dart';
 import 'package:quanlychitieu/pages/transfer_history_page/transfer_history_page.dart';
 import 'package:quanlychitieu/pages/first_update_profile_page/first_update_profile_page.dart';
@@ -72,6 +74,31 @@ final GoRouter goRouter = GoRouter(
               return CustomTransitionPage(
                   key: state.pageKey,
                   child: FirstUpdateProfilePage(),
+                  transitionDuration: const Duration(milliseconds: 400),
+                  transitionsBuilder: _slideTransition
+              );
+            }
+        ),
+        GoRoute(
+            path: AppRoute.reset_pass.path,
+            name: AppRoute.reset_pass.name,
+            pageBuilder: (context, state){
+              return CustomTransitionPage(
+                  key: state.pageKey,
+                  child: NewPasswordPage(),
+                  transitionDuration: const Duration(milliseconds: 400),
+                  transitionsBuilder: _slideTransition
+              );
+            }
+        ),
+        GoRoute(
+            path: AppRoute.otp.path,
+            name: AppRoute.otp.name,
+            pageBuilder: (context, state){
+              final email = state.extra as String? ?? '';
+              return CustomTransitionPage(
+                  key: state.pageKey,
+                  child: EmailOtpPage(email: email,),
                   transitionDuration: const Duration(milliseconds: 400),
                   transitionsBuilder: _slideTransition
               );

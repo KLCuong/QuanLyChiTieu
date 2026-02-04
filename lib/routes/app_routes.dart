@@ -29,5 +29,14 @@ class AppRoute{
       name: 'Profile_Update_Page',
       path: '/profile_update_page'
   );
-  static List<AppRouteInfo> get all => [splash, home, transfer_history, login, update_profile];
+  static const reset_pass = AppRouteInfo(
+      name: 'Reset_pass_page',
+      path: '/reset_pass_page'
+  );
+  static const otp = AppRouteInfo(
+    name: 'Email_Otp_Page',
+    path: '/email_otp_page'
+  );
+  static List<AppRouteInfo> get all => [reset_pass, splash, otp,
+    home, transfer_history, login, update_profile];
 }

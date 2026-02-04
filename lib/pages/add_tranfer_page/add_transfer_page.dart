@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:quanlychitieu/models/user_profile.dart';
 import 'package:quanlychitieu/routes/app_routes.dart';
 import 'package:quanlychitieu/utils/app_colors.dart';
 import 'package:quanlychitieu/utils/app_enums.dart';
@@ -11,9 +12,10 @@ import 'package:quanlychitieu/widgets/scroll_buble.dart';
 
 
 class AddTranferPage extends StatefulWidget{
-
+  final UserProfile? userProfile;
   const AddTranferPage({
     super.key,
+    this.userProfile
   });
 
   @override
@@ -30,8 +32,8 @@ class _AddTranferState extends State<AddTranferPage>{
   TransferType? selectedFromWallet = TransferType.cash;
   TransferType? selectedToWallet = TransferType.bank;
 
-  String? availableFrom = "100 VND";
-  String? availableTo = "0 VND";
+  String? availableFrom = "100 \$";
+  String? availableTo = "0 \$";
 
   //Date Picker
   DateTime? predate = DateTime.now();
@@ -412,7 +414,7 @@ class _AddTranferState extends State<AddTranferPage>{
                         prefixIcon: Container(
                           width: 32,
                           child: Center(
-                            child: Text("VND",
+                            child: Text("\$",
                               style: AppFonts.beVietnamRegular14.
                               copyWith(color: AppColors.grey),
                             ),

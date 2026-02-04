@@ -8,6 +8,7 @@ class UserProfile {
   final String role;
   final DateTime createdAt;
   final DateTime updatedAt;
+  final String? email;
 
   UserProfile({
     required this.id,
@@ -16,6 +17,7 @@ class UserProfile {
     this.phoneNumber,
     this.dateOfBirth,
     this.address,
+    this.email,
     required this.role,
     required this.createdAt,
     required this.updatedAt,
@@ -34,6 +36,20 @@ class UserProfile {
       role: json['role'] ?? 'user',
       createdAt: DateTime.parse(json['created_at']),
       updatedAt: DateTime.parse(json['updated_at']),
+      email: json['email']
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'full_name': fullName,
+      'avatar_url': avatarUrl,
+      'phone_number': phoneNumber,
+      'date_of_birth': dateOfBirth?.toIso8601String(),
+      'address': address,
+      'role': role,
+      'updated_at': DateTime.now().toIso8601String(),
+      'email': email
+    };
   }
 }

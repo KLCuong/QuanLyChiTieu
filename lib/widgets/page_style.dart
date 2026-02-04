@@ -56,7 +56,6 @@ class _CustomPageState extends State<CustomPage>{
         appBar: (widget.hasAppBar!)? CustomAppBar(title: widget.pageName!) : null,
         body: widget.widget!,
 
-
       ),
     );
   }

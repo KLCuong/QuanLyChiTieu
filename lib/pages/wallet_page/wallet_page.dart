@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:quanlychitieu/models/user_profile.dart';
 import 'package:quanlychitieu/pages/wallet_page/widgets/walletbox.dart';
 import 'package:quanlychitieu/utils/app_colors.dart';
 import 'package:quanlychitieu/utils/app_enums.dart';
@@ -8,8 +9,11 @@ import 'package:quanlychitieu/utils/app_gardients.dart';
 import 'package:quanlychitieu/utils/app_icons.dart';
 
 class WalletPage extends StatefulWidget{
-
-  const WalletPage({super.key});
+  final UserProfile? userProfile;
+  const WalletPage({
+    super.key,
+    this.userProfile
+  });
 
   @override
   State createState() => _WalletPageState();
@@ -56,7 +60,7 @@ class _WalletPageState extends State<WalletPage>{
                   style: AppFonts.robotoMedium32.copyWith(color: AppColors.white),
                   children: [
                     TextSpan(
-                      text: " VND",
+                      text: "\$",
                       style: AppFonts.beVietnamMedium14.copyWith(color: AppColors.white),
                     )
                   ]

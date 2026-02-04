@@ -33,7 +33,7 @@ class AuthService {
     if (user == null) return null;
 
     final data = await _client
-        .from('user_profile')
+        .from('user_profiles')
         .select()
         .eq('id', user.id)
         .single();
@@ -49,13 +49,10 @@ class AuthService {
     DateTime? dateOfBirth,
     String? address,
   }) async {
-    final client = Supabase.instance.client;
-    final user = client.auth.currentUser;
+    final user = _client.auth.currentUser;
     if (user == null) return;
 
-    await client
-        .from('user_profile')
-        .update({
+    await _client.from('user_profiles').update({
       if (fullName != null) 'full_name': fullName,
       if (avatarUrl != null) 'avatar_url': avatarUrl,
       if (phoneNumber != null) 'phone_number': phoneNumber,
@@ -63,8 +60,8 @@ class AuthService {
         'date_of_birth': dateOfBirth.toIso8601String(),
       if (address != null) 'address': address,
       'updated_at': DateTime.now().toIso8601String(),
-    })
-        .eq('id', user.id);
+    }).eq('id', user.id);
+
   }
 
 
@@ -86,6 +83,7 @@ class AuthService {
     if (res.user == null) {
       throw Exception("Signup failed");
     }
+    print('User signed up: ${res.user!.id}');
   }
 
   /// CHECK LOGIN
@@ -93,13 +91,27 @@ class AuthService {
     return _client.auth.currentSession != null;
   }
 
-  Future<void> getProfile() async{
+  /// SEND RESET PASSWORD EMAIL (BY LINK)
+  Future<void> sendResetPasswordEmail(String email) async {
+    await _client.auth.resetPasswordForEmail(
+      email,
+      redirectTo: 'myapp://reset-password',
+    );
+  }
 
+  /// UPDATE NEW PASSWORD
+  Future<void> updatePassword(String newPassword) async {
+    await _client.auth.updateUser(
+      UserAttributes(
+        password: newPassword,
+      ),
+    );
   }
 
   /// LOGOUT
-  Future<void> logout() async {
+  Future<bool> logout() async {
     await _googleAuthService.signOut();
     await _client.auth.signOut();
+    return true;
   }
 }

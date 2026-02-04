@@ -84,7 +84,7 @@ class _WalletBoxState extends State<WalletBox>{
                 keyboardType: TextInputType.number,
                 prefix: const Padding(
                   padding: EdgeInsets.only(left: 8),
-                  child: Text('đ '),
+                  child: Text('\$'),
                 ),
                 padding: const EdgeInsets.symmetric(
                   vertical: 12,

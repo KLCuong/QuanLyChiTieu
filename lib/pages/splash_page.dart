@@ -20,7 +20,7 @@ class SplashPage extends StatefulWidget{
 }
 
 class _SplashPageState extends State<SplashPage> {
-
+  late final StreamSubscription<AuthState> _authSubscription;
   void _checkAuth() async{
     await Future.delayed(const Duration(seconds: 3)); //why?
     final supabase = Supabase.instance.client;
@@ -44,6 +44,7 @@ class _SplashPageState extends State<SplashPage> {
     _checkAuth();
   }
 
+
   @override
   Widget build(BuildContext context) {
     return CustomPage(
@@ -59,7 +60,7 @@ class _SplashPageState extends State<SplashPage> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(16),
                     child: const Image(
-                      image: AssetImage("assets/icons/slshizuka.jpg"),
+                      image: AssetImage("assets/icons/goldship.jpg"),
                       width: 240,
                       height: 240,
                       fit: BoxFit.cover,
